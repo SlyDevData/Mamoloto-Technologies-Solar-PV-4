@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Mamoloto Technologies Solar PV 4.0{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h1><i class="fas fa-paper-plane" style="color: #f1c40f;"></i> Contact Us</h1>
+        <p style="font-size: 1.1rem; color: #555;">
+            We'd love to hear from you. Reach out with any questions, comments, or inquiries about our solar PV solutions.
+        </p>
+    </div>
+
+    {% if success %}
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i>
+        <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you shortly.
+    </div>
+    {% endif %}
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <div class="card">
+            <h2><i class="fas fa-pencil-alt"></i> Send a Message</h2>
+            <form method="POST" action="/contact">
+                <div style="margin-bottom: 1rem;">
+                    <label for="name"><i class="fas fa-user"></i> Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="message"><i class="fas fa-comment"></i> Message</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="How can we help?"></textarea>
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-address-card"></i> Contact Information</h2>
+            <p><i class="fab fa-facebook" style="color: #f1c40f;"></i> <strong>Facebook Group:</strong></p>
+            <p><a href="https://www.facebook.com/groups/1026005524798169" target="_blank">Join our community on Facebook</a></p>
+            <hr>
+            <p><i class="fas fa-envelope" style="color: #f1c40f;"></i> <strong>Email:</strong></p>
+            <p><a href="mailto:info@mamolototechnologies.co.za">info@mamolototechnologies.co.za</a></p>
+            <hr>
+            <p><i class="fas fa-phone" style="color: #f1c40f;"></i> <strong>Phone:</strong></p>
+            <p>+27 (0) 12 345 6789</p>
+            <hr>
+            <p><i class="fas fa-map-marker-alt" style="color: #f1c40f;"></i> <strong>Location:</strong></p>
+            <p>South Africa</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                <i class="fas fa-check-circle" style="color: #f1c40f;"></i> Serving residential, commercial, and industrial clients across South Africa.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
