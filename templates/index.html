@@ -3,33 +3,181 @@
 {% block title %}Home - Mamoloto Technologies Solar PV 4.0{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="hero">
-        <h1><i class="fas fa-sun" style="color: #f1c40f;"></i> Mamoloto Technologies</h1>
-        <h2>Solar PV 4.0</h2>
-        <p>
-            <i class="fas fa-leaf" style="margin-right: 0.5rem;"></i>
-            Powering a sustainable future through innovative solar photovoltaic solutions for residential, commercial, and industrial use.
-        </p>
-        <div>
-            <a href="/about" class="btn pulse"><i class="fas fa-arrow-right"></i> Learn More</a>
-            <a href="/contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Powering <span>South Africa's</span> Future</h1>
+            <div class="subtitle">Solar PV 4.0 — Engineering, Procurement & Construction</div>
+            <p>
+                We deliver turnkey solar and energy storage solutions from feasibility to operation.
+                Committed to reducing greenhouse gas emissions and building a sustainable tomorrow.
+            </p>
+            <div class="btn-group">
+                <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get a Quote</a>
+                <a href="/about" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> Learn More</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="number" id="statProjects">0</span>
+                <span class="label">Projects Completed</span>
+            </div>
+            <div class="stat">
+                <span class="number" id="statPanels">0</span>
+                <span class="label">Solar Panels Installed</span>
+            </div>
+            <div class="stat">
+                <span class="number" id="statYears">0</span>
+                <span class="label">Years of Experience</span>
+            </div>
         </div>
     </div>
+</section>
 
-    <div class="grid-3">
-        <div class="card">
-            <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
-            <p>To reduce greenhouse gas emissions and promote renewable energy adoption across South Africa, helping achieve the United Nations' sustainable development goals.</p>
+<!-- Mission Section -->
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our <span>Mission</span></h2>
+            <p>Driving renewable energy adoption across South Africa to create a sustainable environment for future generations.</p>
         </div>
-        <div class="card">
-            <h2><i class="fas fa-eye"></i> Our Vision</h2>
-            <p>To be a leader in renewable energy, diversifying into wind, ocean wave, and green hydrogen energy while creating a sustainable environment for future generations.</p>
-        </div>
-        <div class="card">
-            <h2><i class="fas fa-globe-africa"></i> Our Impact</h2>
-            <p>Solar PV energy is non-toxic and will never be depleted. We aim to prevent shack fires and reduce copper theft by providing safe, contained solar solutions.</p>
+        <div class="grid-3">
+            <div class="card">
+                <div class="icon"><i class="fas fa-leaf"></i></div>
+                <h3>Reduce Emissions</h3>
+                <p>Committed to reducing greenhouse gas emissions and promoting clean, renewable energy sources throughout South Africa.</p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Prevent Shack Fires</h3>
+                <p>Providing safe, contained solar solutions to prevent shack fires and reduce copper theft in vulnerable communities.</p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-globe-africa"></i></div>
+                <h3>Diversify Energy</h3>
+                <p>Expanding into wind, ocean waves, and green hydrogen energy to build a comprehensive renewable energy portfolio.</p>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}  
+</section>
+
+<!-- Stats Bar -->
+<section class="stats-section">
+    <div class="container">
+        <div class="grid-4">
+            <div>
+                <div class="stat-number">34+</div>
+                <div class="stat-label">Years of Electrical Engineering Experience</div>
+            </div>
+            <div>
+                <div class="stat-number">2018</div>
+                <div class="stat-label">Year Founded[reference:8]</div>
+            </div>
+            <div>
+                <div class="stat-number">EPC</div>
+                <div class="stat-label">Engineering, Procurement & Construction</div>
+            </div>
+            <div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Commitment to Renewable Energy</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section style="padding: 4rem 0; background: #f7fafc;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Choose <span>Mamoloto Technologies</span></h2>
+            <p>With over three decades of electrical engineering expertise, we deliver excellence at every step.</p>
+        </div>
+        <div class="grid-2">
+            <div class="card">
+                <div class="icon"><i class="fas fa-user-graduate"></i></div>
+                <h3>Led by Dr. Mamoloto Tlabela, Ph.D</h3>
+                <p>
+                    Our founder holds a PhD in Commerce and Administration with over 34 years of experience,
+                    working from apprentice electrician to Regional Director.[reference:10] Mamoloto Technologies
+                    was founded in 2018 to address South Africa's critical energy challenges.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-solar-panel"></i></div>
+                <h3>Turnkey Solar Solutions</h3>
+                <p>
+                    As an EPC company, we deliver end-to-end solar PV solutions — from manufacturing and
+                    installation to system upgrades and maintenance — for residential, commercial, and
+                    industrial clients.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-seedling"></i></div>
+                <h3>Sustainable Future Focus</h3>
+                <p>
+                    "Every generation borrows the planet from the next." We are committed to ensuring the
+                    environment is sustainable for future generations through renewable energy innovation.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon"><i class="fas fa-wind"></i></div>
+                <h3>Diversifying Beyond Solar</h3>
+                <p>
+                    Our vision extends to wind energy, ocean wave energy, and green hydrogen — building a
+                    comprehensive renewable energy ecosystem for South Africa.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to <span>Go Solar</span>?</h2>
+        <p>Join us in building a sustainable future. Contact us today for a free consultation and quote.</p>
+        <a href="/contact" class="btn btn-primary"><i class="fas fa-phone"></i> Contact Us Today</a>
+    </div>
+</section>
+
+<script>
+    // Animate stats on load
+    document.addEventListener('DOMContentLoaded', function () {
+        const projects = document.getElementById('statProjects');
+        const panels = document.getElementById('statPanels');
+        const years = document.getElementById('statYears');
+
+        let pCount = 0;
+        let panelCount = 0;
+        let yCount = 0;
+
+        const pInterval = setInterval(() => {
+            pCount += 2;
+            if (pCount >= 50) {
+                pCount = 50;
+                clearInterval(pInterval);
+            }
+            projects.textContent = pCount + '+';
+        }, 40);
+
+        const panelInterval = setInterval(() => {
+            panelCount += 5;
+            if (panelCount >= 150) {
+                panelCount = 150;
+                clearInterval(panelInterval);
+            }
+            panels.textContent = panelCount + '+';
+        }, 30);
+
+        const yInterval = setInterval(() => {
+            yCount += 1;
+            if (yCount >= 8) {
+                yCount = 8;
+                clearInterval(yInterval);
+            }
+            years.textContent = yCount + '+';
+        }, 50);
+    });
+</script>
+{% endblock %}
