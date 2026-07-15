@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Solar Academy � Training & Capacity Building{% endblock %}
+
+{% block extra_css %}
+<style>
+    .academy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .academy-card {
+        background: rgba(255,255,255,0.02);
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        border: 1px solid rgba(255,255,255,0.04);
+        text-align: center;
+        transition: 0.4s;
+    }
+
+        .academy-card:hover {
+            transform: translateY(-6px);
+            border-color: #16A34A;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .academy-card i {
+            font-size: 3rem;
+            color: #F97316;
+            margin-bottom: 1rem;
+        }
+
+        .academy-card h3 {
+            color: #e2e8f0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .academy-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+</style>
+{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>Solar Academy <span>South Africa</span></h2>
+            <p>Building capacity through knowledge and skills development</p>
+        </div>
+
+        <div class="academy-grid">
+            <div class="academy-card animate-on-scroll">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>PV Design & Installation</h3>
+                <p>Practical training for engineers and technicians on Solar PV 4.0 systems.</p>
+            </div>
+            <div class="academy-card animate-on-scroll">
+                <i class="fas fa-microchip"></i>
+                <h3>Smart Grid & Monitoring</h3>
+                <p>Courses on AMI, SCADA, and advanced energy analytics.</p>
+            </div>
+            <div class="academy-card animate-on-scroll">
+                <i class="fas fa-cube"></i>
+                <h3>Digital Twin & AI</h3>
+                <p>Workshops on simulation, optimisation, and predictive maintenance.</p>
+            </div>
+            <div class="academy-card animate-on-scroll">
+                <i class="fas fa-tools"></i>
+                <h3>Commissioning & Maintenance</h3>
+                <p>Hands-on training for safe and efficient system handover.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="/contact" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Enquire Now</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

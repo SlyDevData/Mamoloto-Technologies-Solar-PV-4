@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}About the Founder � Dr. Mamoloto Tlabela{% endblock %}
+
+{% block extra_css %}
+<style>
+    .founder-hero {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+        align-items: center;
+        padding: 3rem 0;
+    }
+
+        .founder-hero .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #16A34A, #0B0F1A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: #F97316;
+            border: 3px solid rgba(22, 163, 74, 0.3);
+            margin: 0 auto;
+        }
+
+        .founder-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            color: #e2e8f0;
+        }
+
+            .founder-hero h1 span {
+                color: #16A34A;
+            }
+
+        .founder-hero .title {
+            color: #F97316;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .founder-hero p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+    .highlight-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .highlight-item {
+        background: rgba(255,255,255,0.02);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+
+        .highlight-item i {
+            font-size: 2.5rem;
+            color: #F97316;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-item .label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+    @media (max-width: 768px) {
+        .founder-hero {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section style="padding: 2rem 0 4rem;">
+    <div class="container">
+        <div class="founder-hero animate-on-scroll">
+            <div class="avatar"><i class="fas fa-user-tie"></i></div>
+            <div>
+                <h1>Dr. Mamoloto <span>Tlabela</span></h1>
+                <div class="title">PhD � SAIEE � Former Acting Head of Electricity � City of Tshwane</div>
+                <p>
+                    With over 35 years of electrical engineering experience, Dr. Tlabela is a respected
+                    thought leader in power systems, smart grid, and energy infrastructure. He has held
+                    senior roles in municipal electricity, academic research, and international innovation
+                    programmes.
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    He is the founder of Mamoloto Technologies and the architect of the Solar PV 4.0�
+                    framework. He is also an author, conference speaker, and active contributor to
+                    engineering standards in Africa.
+                </p>
+            </div>
+        </div>
+
+        <div class="highlight-grid">
+            <div class="highlight-item"><i class="fas fa-graduation-cap"></i><div class="label">PhD in Commerce & Administration</div></div>
+            <div class="highlight-item"><i class="fas fa-bolt"></i><div class="label">Former Acting Head � Electricity, City of Tshwane</div></div>
+            <div class="highlight-item"><i class="fas fa-chalkboard-teacher"></i><div class="label">SAIEE Leadership & Conference Speaker</div></div>
+            <div class="highlight-item"><i class="fas fa-book-open"></i><div class="label">Author & Researcher</div></div>
+            <div class="highlight-item"><i class="fas fa-microchip"></i><div class="label">Innovation Programmes & Digital Energy</div></div>
+            <div class="highlight-item"><i class="fas fa-globe-africa"></i><div class="label">African Energy Systems Expert</div></div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.02); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.04); margin-top: 2rem;">
+            <h3 style="color: #16A34A; font-family: 'Montserrat', sans-serif;">�Every generation borrows the planet from the next.�</h3>
+            <p style="color: #94a3b8; margin-top: 0.5rem;">
+                Dr. Tlabela�s work is driven by the conviction that Africa must leapfrog into intelligent,
+                sustainable energy systems. His research and publications continue to shape the continent�s
+                energy transition.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

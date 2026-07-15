@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Research & Innovation � Solar PV 4.0 AI{% endblock %}
+
+{% block extra_css %}
+<style>
+    .research-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .research-item {
+        background: rgba(255,255,255,0.02);
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        border: 1px solid rgba(255,255,255,0.04);
+        transition: 0.4s;
+    }
+
+        .research-item:hover {
+            transform: translateY(-6px);
+            border-color: #4C1D95;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .research-item .icon {
+            font-size: 2.8rem;
+            color: #4C1D95;
+            margin-bottom: 1rem;
+        }
+
+        .research-item h3 {
+            color: #e2e8f0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .research-item p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .research-item .badge {
+            display: inline-block;
+            background: rgba(76, 29, 149, 0.2);
+            color: #a78bfa;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+</style>
+{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>Research & <span>Innovation</span></h2>
+            <p>Pioneering the future of intelligent energy systems</p>
+        </div>
+
+        <div class="research-grid">
+            <div class="research-item animate-on-scroll">
+                <div class="icon"><i class="fas fa-robot"></i></div>
+                <h3>SREOS� � Smart Renewable Energy Optimisation</h3>
+                <p>AI-driven platform for real-time energy management and predictive analytics.</p>
+                <span class="badge">AI Optimisation</span>
+            </div>
+            <div class="research-item animate-on-scroll">
+                <div class="icon"><i class="fas fa-cloud"></i></div>
+                <h3>Virtual Power Plants (VPP)</h3>
+                <p>Aggregating distributed energy resources for grid stability and revenue generation.</p>
+                <span class="badge">Grid Intelligence</span>
+            </div>
+            <div class="research-item animate-on-scroll">
+                <div class="icon"><i class="fas fa-microgrid"></i></div>
+                <h3>Hybrid Microgrids</h3>
+                <p>Integration of solar, storage, and diesel for remote communities and mines.</p>
+                <span class="badge">Resilience</span>
+            </div>
+            <div class="research-item animate-on-scroll">
+                <div class="icon"><i class="fas fa-car"></i></div>
+                <h3>EV Charging Intelligence</h3>
+                <p>Smart charging algorithms with grid-aware scheduling and demand response.</p>
+                <span class="badge">Future Mobility</span>
+            </div>
+            <div class="research-item animate-on-scroll">
+                <div class="icon"><i class="fas fa-cube"></i></div>
+                <h3>Digital Twin Technology</h3>
+                <p>Virtual system models for performance optimisation and predictive maintenance.</p>
+                <span class="badge">Digital Twin</span>
+            </div>
+            <div class="research-item animate-on-scroll">
+                <div class="icon"><i class="fas fa-tools"></i></div>
+                <h3>Smart Commissioning Protocols</h3>
+                <p>AI-assisted commissioning procedures to reduce time and improve accuracy.</p>
+                <span class="badge">Innovation</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, send_from_directory
+from flask import Flask, render_template, request, send_from_directory
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -9,8 +9,8 @@ app = Flask(__name__)
 # ---------- EMAIL CONFIG ----------
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SENDER_EMAIL = "mamoloto@tlabela.com"   # Replace with your sending email
-SENDER_PASSWORD = "your-app-password"   # REPLACE with your actual App Password
+SENDER_EMAIL = "mamoloto@tlabela.com"   
+SENDER_PASSWORD = "your-app-password"   # Replace with actual password
 RECEIVER_EMAIL = "mamoloto@tlabela.com"
 
 def send_email_alert(name, email, phone, subject, message):
@@ -44,6 +44,7 @@ def send_email_alert(name, email, phone, subject, message):
         print(f"Name: {name}, Email: {email}, Message: {message}")
         return False
 
+# ---------- ROUTES ----------
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -56,22 +57,38 @@ def about():
 def services():
     return render_template('services.html')
 
-@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/contact')
 def contact():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        phone = request.form.get('phone')
-        subject = request.form.get('subject')
-        message = request.form.get('message')
-        send_email_alert(name, email, phone, subject, message)
-        return render_template('contact.html', success=True)
-    return render_template('contact.html', success=False)
+    return render_template('contact.html')
+
+# ----- NEW PAGES -----
+@app.route('/projects')
+def projects():
+    return render_template('projects.html')
+
+@app.route('/knowledge')
+def knowledge():
+    return render_template('knowledge.html')
+
+@app.route('/press')
+def press():
+    return render_template('press.html')
+
+@app.route('/founder')
+def founder():
+    return render_template('founder.html')
+
+@app.route('/research')
+def research():
+    return render_template('research.html')
+
+@app.route('/academy')
+def academy():
+    return render_template('academy.html')
 
 # ---------- STATIC PDF DOWNLOAD ----------
 @app.route('/download-profile')
 def download_profile():
-    # This serves the PDF from the 'static' folder
     return send_from_directory('static', 'Mamoloto_Technologies_Profile.pdf', as_attachment=True)
 
 if __name__ == '__main__':

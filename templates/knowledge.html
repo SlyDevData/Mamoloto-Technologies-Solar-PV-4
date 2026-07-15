@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Knowledge Centre � Solar PV 4.0 Insights{% endblock %}
+
+{% block extra_css %}
+<style>
+    .knowledge-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .knowledge-item {
+        background: rgba(255,255,255,0.02);
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.04);
+        text-align: center;
+        transition: 0.4s;
+    }
+    .knowledge-item:hover {
+        transform: translateY(-6px);
+        border-color: #16A34A;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .knowledge-item i { font-size: 3rem; color: #F97316; margin-bottom: 1rem; }
+    .knowledge-item h3 { color: #e2e8f0; font-family: 'Montserrat', sans-serif; }
+    .knowledge-item p { color: #94a3b8; font-size: 0.95rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>Knowledge <span>Centre</span></h2>
+            <p>Engineering intelligence for Africa�s energy future</p>
+        </div>
+
+        <div class="knowledge-grid">
+            <div class="knowledge-item animate-on-scroll">
+                <i class="fas fa-file-alt"></i>
+                <h3>Engineering Articles</h3>
+                <p>Technical insights on Solar PV, microgrids, and smart infrastructure.</p>
+            </div>
+            <div class="knowledge-item animate-on-scroll">
+                <i class="fas fa-file-pdf"></i>
+                <h3>White Papers</h3>
+                <p>In-depth research on AI optimisation, digital twins, and grid intelligence.</p>
+            </div>
+            <div class="knowledge-item animate-on-scroll">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Solar PV 4.0 Insights</h3>
+                <p>Practical guides on system design, commissioning, and performance.</p>
+            </div>
+            <div class="knowledge-item animate-on-scroll">
+                <i class="fas fa-tools"></i>
+                <h3>Commissioning Guides</h3>
+                <p>Step-by-step manuals for safe and efficient system commissioning.</p>
+            </div>
+            <div class="knowledge-item animate-on-scroll">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Case Studies</h3>
+                <p>Real project examples with challenges, solutions, and outcomes.</p>
+            </div>
+            <div class="knowledge-item animate-on-scroll">
+                <i class="fas fa-download"></i>
+                <h3>Downloads</h3>
+                <p>Technical datasheets, brochures, and reference materials.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="/contact" class="btn btn-primary"><i class="fas fa-envelope"></i> Request Access</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
