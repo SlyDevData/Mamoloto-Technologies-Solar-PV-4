@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Home • Intelligent Energy Systems – Solar PV 4.0™{% endblock %}
+{% block title %}Home • Intelligent Solar PV 4.0 – Mamoloto Technologies{% endblock %}
 
 {% block extra_css %}
 <style>
-    /* ----- HERO (Deep Energy Black with animated grid) ----- */
+    /* ----- HERO (Cinematic with Particle Grid) ----- */
     .hero {
         background: #0B0F1A;
         padding: 5rem 0 4rem;
@@ -12,39 +12,120 @@
         position: relative;
         overflow: hidden;
         border-bottom: 2px solid rgba(22, 163, 74, 0.2);
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
     }
-
+        /* Particle grid background */
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 20% 30%, rgba(22, 163, 74, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(249, 115, 22, 0.04) 0%, transparent 50%);
+            background-image: radial-gradient(circle at 10% 20%, rgba(22, 163, 74, 0.03) 0%, transparent 50%), radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.02) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.02) 0%, transparent 70%);
             z-index: 0;
         }
-        /* Energy flow lines in hero */
-        .hero .energy-line-bg {
-            position: absolute;
-            width: 200%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #16A34A, #F97316, transparent);
-            opacity: 0.15;
-            animation: flowLine 12s linear infinite;
-            z-index: 0;
-            top: 20%;
-            left: -50%;
+    /* Floating particles (energy nodes) */
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(22, 163, 74, 0.15);
+        animation: floatParticle 20s infinite alternate;
+        z-index: 0;
+    }
+
+        .particle:nth-child(1) {
+            width: 8px;
+            height: 8px;
+            top: 10%;
+            left: 5%;
+            animation-duration: 18s;
         }
 
-            .hero .energy-line-bg:nth-child(2) {
-                top: 50%;
-                animation-duration: 15s;
-                animation-delay: -4s;
-            }
+        .particle:nth-child(2) {
+            width: 12px;
+            height: 12px;
+            top: 70%;
+            left: 10%;
+            animation-duration: 22s;
+            animation-delay: -3s;
+            background: rgba(249, 115, 22, 0.1);
+        }
 
-            .hero .energy-line-bg:nth-child(3) {
-                top: 80%;
-                animation-duration: 18s;
-                animation-delay: -8s;
-            }
+        .particle:nth-child(3) {
+            width: 6px;
+            height: 6px;
+            top: 30%;
+            right: 15%;
+            animation-duration: 16s;
+            animation-delay: -5s;
+            background: rgba(76, 29, 149, 0.15);
+        }
+
+        .particle:nth-child(4) {
+            width: 15px;
+            height: 15px;
+            bottom: 20%;
+            right: 5%;
+            animation-duration: 25s;
+            animation-delay: -8s;
+            background: rgba(22, 163, 74, 0.05);
+        }
+
+        .particle:nth-child(5) {
+            width: 10px;
+            height: 10px;
+            top: 50%;
+            left: 50%;
+            animation-duration: 19s;
+            animation-delay: -2s;
+            background: rgba(249, 115, 22, 0.08);
+        }
+
+    @keyframes floatParticle {
+        0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.3;
+        }
+
+        33% {
+            transform: translate(30px, -40px) scale(1.5);
+            opacity: 0.8;
+        }
+
+        66% {
+            transform: translate(-20px, 20px) scale(0.8);
+            opacity: 0.5;
+        }
+
+        100% {
+            transform: translate(10px, -30px) scale(1.2);
+            opacity: 0.6;
+        }
+    }
+
+    /* Energy flow lines in background */
+    .hero .energy-line-bg {
+        position: absolute;
+        width: 200%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #16A34A, #F97316, transparent);
+        opacity: 0.08;
+        animation: flowLine 12s linear infinite;
+        z-index: 0;
+        top: 20%;
+    }
+
+        .hero .energy-line-bg:nth-child(7) {
+            top: 50%;
+            animation-duration: 15s;
+            animation-delay: -4s;
+        }
+
+        .hero .energy-line-bg:nth-child(8) {
+            top: 80%;
+            animation-duration: 18s;
+            animation-delay: -8s;
+        }
 
     @keyframes flowLine {
         0% {
@@ -67,7 +148,7 @@
 
     .hero-content h1 {
         font-family: 'Montserrat', sans-serif;
-        font-size: 3.2rem;
+        font-size: 3.4rem;
         font-weight: 900;
         line-height: 1.2;
         margin-bottom: 0.5rem;
@@ -98,7 +179,6 @@
         flex-wrap: wrap;
     }
 
-    /* Hero right visual – network nodes and grid */
     .hero-visual {
         display: flex;
         justify-content: center;
@@ -157,7 +237,24 @@
                         animation-delay: 0.6s;
                     }
 
-    /* ----- TRUST STRIP (with new colors) ----- */
+    @keyframes nodePulse {
+        0% {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+
+        50% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+    }
+
+    /* ----- TRUST STRIP ----- */
     .trust-strip {
         background: #0B0F1A;
         padding: 1.5rem 0;
@@ -187,328 +284,6 @@
                 color: #16A34A;
             }
 
-    /* ----- PV 4.0 SECTION (Layered Diagram) ----- */
-    .pv-section {
-        padding: 4rem 0;
-        background: #0B0F1A;
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-        .pv-section .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-    .pv-text h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: #e2e8f0;
-        margin-bottom: 1rem;
-    }
-
-        .pv-text h2 span {
-            color: #16A34A;
-        }
-
-    .pv-text p {
-        color: #94a3b8;
-        font-size: 1.05rem;
-        line-height: 1.8;
-    }
-
-    .pv-diagram {
-        background: rgba(255,255,255,0.02);
-        border-radius: 16px;
-        padding: 2rem;
-        border: 1px solid rgba(255,255,255,0.05);
-        backdrop-filter: blur(4px);
-    }
-
-        .pv-diagram .layer {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.8rem;
-            border-left: 4px solid #16A34A;
-            background: rgba(255,255,255,0.02);
-            border-radius: 0 8px 8px 0;
-            transition: 0.3s;
-        }
-
-            .pv-diagram .layer:hover {
-                background: rgba(255,255,255,0.05);
-                transform: translateX(4px);
-            }
-
-            .pv-diagram .layer .icon {
-                font-size: 1.6rem;
-                color: #F97316;
-                width: 40px;
-                text-align: center;
-            }
-
-            .pv-diagram .layer .content {
-                flex: 1;
-            }
-
-                .pv-diagram .layer .content strong {
-                    display: block;
-                    color: #e2e8f0;
-                }
-
-                .pv-diagram .layer .content span {
-                    font-size: 0.9rem;
-                    color: #94a3b8;
-                }
-
-    /* ----- SOLUTIONS CARDS (glassmorphism) ----- */
-    .solutions-section {
-        padding: 4rem 0;
-        background: #0B0F1A;
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .solutions-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-    }
-
-    .solution-card {
-        background: rgba(255,255,255,0.02);
-        backdrop-filter: blur(4px);
-        padding: 2rem 1.5rem;
-        border-radius: 16px;
-        text-align: center;
-        transition: all 0.3s;
-        border: 1px solid rgba(255,255,255,0.04);
-    }
-
-        .solution-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(22, 163, 74, 0.3);
-            box-shadow: 0 12px 48px rgba(0,0,0,0.4);
-            background: rgba(255,255,255,0.04);
-        }
-
-        .solution-card .icon {
-            font-size: 2.8rem;
-            color: #F97316;
-            margin-bottom: 1rem;
-        }
-
-        .solution-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            color: #e2e8f0;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .solution-card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-    /* ----- WHY MAMOLOTO (differentiators) ----- */
-    .why-section {
-        padding: 4rem 0;
-        background: #0B0F1A;
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .why-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-
-        .why-grid .feature-card {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(4px);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid #16A34A;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-
-            .why-grid .feature-card h4 {
-                color: #e2e8f0;
-                margin-bottom: 0.3rem;
-                font-family: 'Montserrat', sans-serif;
-            }
-
-            .why-grid .feature-card p {
-                color: #94a3b8;
-                font-size: 0.95rem;
-            }
-
-    /* ----- SHOWCASE (visual system) ----- */
-    .showcase-section {
-        padding: 4rem 0;
-        background: #0B0F1A;
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .showcase-box {
-        background: rgba(255,255,255,0.02);
-        border-radius: 20px;
-        padding: 3rem 2rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        min-height: 300px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid rgba(255,255,255,0.05);
-        backdrop-filter: blur(4px);
-    }
-
-        .showcase-box h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: #16A34A;
-        }
-
-        .showcase-box p {
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto 1.5rem;
-        }
-
-        .showcase-box .mock-diagram {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-            .showcase-box .mock-diagram .block {
-                background: rgba(255,255,255,0.04);
-                padding: 1rem 1.5rem;
-                border-radius: 12px;
-                border: 1px solid rgba(255,255,255,0.06);
-                min-width: 80px;
-                font-weight: 600;
-                color: #F97316;
-                font-size: 0.9rem;
-                backdrop-filter: blur(4px);
-            }
-
-                .showcase-box .mock-diagram .block i {
-                    display: block;
-                    font-size: 2rem;
-                    margin-bottom: 0.3rem;
-                    color: #16A34A;
-                }
-
-    /* ----- INDUSTRIES ----- */
-    .industries-section {
-        padding: 4rem 0;
-        background: #0B0F1A;
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .industries-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 1.5rem;
-        text-align: center;
-    }
-
-        .industries-grid .industry-item {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(4px);
-            padding: 1.5rem 1rem;
-            border-radius: 12px;
-            transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-
-            .industries-grid .industry-item:hover {
-                transform: translateY(-4px);
-                border-color: rgba(22, 163, 74, 0.3);
-            }
-
-            .industries-grid .industry-item i {
-                font-size: 2.2rem;
-                color: #F97316;
-                margin-bottom: 0.5rem;
-                display: block;
-            }
-
-            .industries-grid .industry-item span {
-                font-weight: 600;
-                color: #e2e8f0;
-            }
-
-    /* ----- STRATEGIC VISION (dark) ----- */
-    .vision-section {
-        background: #0B0F1A;
-        padding: 4rem 0;
-        text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-        .vision-section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.4rem;
-            font-weight: 800;
-            color: #e2e8f0;
-        }
-
-            .vision-section h2 span {
-                color: #16A34A;
-            }
-
-        .vision-section p {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            color: #94a3b8;
-            line-height: 1.8;
-        }
-
-    /* ----- CTA (with gradient) ----- */
-    .cta-section {
-        background: linear-gradient(135deg, #0B0F1A, #1a2a1f);
-        padding: 4rem 0;
-        text-align: center;
-        border-top: 1px solid rgba(22, 163, 74, 0.2);
-    }
-
-        .cta-section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.4rem;
-            color: #e2e8f0;
-        }
-
-            .cta-section h2 span {
-                color: #16A34A;
-            }
-
-        .cta-section p {
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0.5rem auto 2rem;
-            font-size: 1.1rem;
-        }
-
-        .cta-section .btn-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
     /* ----- RESPONSIVE ----- */
     @media (max-width: 992px) {
         .hero .container {
@@ -516,26 +291,27 @@
             text-align: center;
         }
 
-        .pv-section .container {
-            grid-template-columns: 1fr;
+        .hero-content p {
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .why-grid {
-            grid-template-columns: 1fr;
+        .hero-content .btn-group {
+            justify-content: center;
+        }
+
+        .hero-content h1 {
+            font-size: 2.6rem;
         }
     }
 
     @media (max-width: 768px) {
         .hero-content h1 {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
         }
 
         .trust-strip .grid-6 {
             grid-template-columns: repeat(3, 1fr);
-        }
-
-        .showcase-box .mock-diagram {
-            gap: 1rem;
         }
     }
 </style>
@@ -543,22 +319,30 @@
 
 {% block content %}
 
-<!-- 1. HERO -->
+<!-- ===== CINEMATIC HERO ===== -->
 <section class="hero">
+    <!-- Particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <!-- Energy lines -->
     <div class="energy-line-bg"></div>
     <div class="energy-line-bg"></div>
     <div class="energy-line-bg"></div>
+
     <div class="container">
         <div class="hero-content">
             <h1>Engineering the <span>Future</span> of Intelligent Energy</h1>
-            <div class="subtitle">Solar PV 4.0 • Smart Infrastructure • Intelligent Systems</div>
+            <div class="subtitle">Solar PV 4.0 • Smart Infrastructure • AI Optimisation</div>
             <p>
                 Mamoloto Technologies delivers intelligent Solar PV 4.0 ecosystems integrating renewable energy,
                 smart infrastructure, digital monitoring, and future-ready control systems.
             </p>
             <div class="btn-group">
-                <a href="#solutions" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Explore Solutions</a>
-                <a href="/about" class="btn btn-secondary"><i class="fas fa-building"></i> View Corporate Profile</a>
+                <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Free Consultation</a>
+                <a href="/projects" class="btn btn-secondary"><i class="fas fa-folder-open"></i> Our Projects</a>
             </div>
         </div>
         <div class="hero-visual">
@@ -566,18 +350,24 @@
                 <div class="node-cluster">
                     <div class="node-item"><i class="fas fa-solar-panel"></i><span>Solar</span></div>
                     <div class="node-item"><i class="fas fa-bolt"></i><span>Grid</span></div>
-                    <div class="node-item"><i class="fas fa-microchip"></i><span>Digital Twin</span></div>
+                    <div class="node-item"><i class="fas fa-microchip"></i><span>AI Twin</span></div>
                 </div>
                 <div style="display: flex; gap: 0.5rem; margin-top: 1rem; opacity: 0.4;">
-                    <span class="node"></span><span class="node" style="background: #F97316;"></span><span class="node" style="background: #4C1D95;"></span>
+                    <span class="node" style="display: inline-block; width: 12px; height: 12px; background: #16A34A; border-radius: 50%; box-shadow: 0 0 20px rgba(22,163,74,0.6);"></span>
+                    <span class="node" style="display: inline-block; width: 12px; height: 12px; background: #F97316; border-radius: 50%; box-shadow: 0 0 20px rgba(249,115,22,0.6);"></span>
+                    <span class="node" style="display: inline-block; width: 12px; height: 12px; background: #4C1D95; border-radius: 50%; box-shadow: 0 0 20px rgba(76,29,149,0.6);"></span>
                 </div>
                 <div class="energy-line" style="width: 80%; margin: 0.5rem auto;"></div>
+                <div style="display: flex; gap: 1.5rem; font-size: 0.7rem; color: #64748b;">
+                    <span><i class="fas fa-check-circle" style="color: #16A34A;"></i> 1.5 MW+ Installed</span>
+                    <span><i class="fas fa-check-circle" style="color: #16A34A;"></i> 35+ Years Expertise</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 2. TRUST STRIP -->
+<!-- ===== TRUST STRIP ===== -->
 <section class="trust-strip">
     <div class="container">
         <div class="grid-6">
@@ -586,158 +376,173 @@
             <div class="trust-item"><i class="fas fa-hard-hat"></i> EPC Delivery</div>
             <div class="trust-item"><i class="fas fa-bolt"></i> LV/MV Systems</div>
             <div class="trust-item"><i class="fas fa-cubes"></i> Digital Twin</div>
-            <div class="trust-item"><i class="fas fa-brain"></i> Smart Grid</div>
+            <div class="trust-item"><i class="fas fa-brain"></i> AI Optimisation</div>
         </div>
     </div>
 </section>
 
-<!-- 3. WHAT IS SOLAR PV 4.0 -->
-<section class="pv-section">
+<!-- ===== REMAINING SECTIONS (kept as before, but now inherit the new base) ===== -->
+<section class="pv-section" style="padding: 4rem 0; background: #0B0F1A; border-bottom: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
-        <div class="pv-text animate-on-scroll">
+        <div class="section-title animate-on-scroll">
             <h2>What is <span>Solar PV 4.0</span>?</h2>
-            <p>
-                Solar PV 4.0 represents the evolution from standalone solar systems into intelligent,
-                connected energy ecosystems that combine generation, infrastructure, intelligence,
-                and a digital twin layer for predictive optimisation.
-            </p>
-            <p style="margin-top: 0.8rem;">
-                It’s not just about panels—it’s about building a smart, resilient, and data-driven
-                energy future.
-            </p>
+            <p>The integration of renewable energy, intelligent infrastructure, data analytics, and digital control into a unified energy ecosystem.</p>
         </div>
-        <div class="pv-diagram animate-on-scroll">
-            <div class="layer"><div class="icon"><i class="fas fa-solar-panel"></i></div><div class="content"><strong>1. Generation</strong><span>Solar PV arrays with high-efficiency modules</span></div></div>
-            <div class="layer"><div class="icon"><i class="fas fa-cogs"></i></div><div class="content"><strong>2. Infrastructure</strong><span>LV/MV switchgear, transformers, and cabling</span></div></div>
-            <div class="layer"><div class="icon"><i class="fas fa-cloud-upload-alt"></i></div><div class="content"><strong>3. Intelligence</strong><span>IoT sensors, real-time monitoring, analytics</span></div></div>
-            <div class="layer"><div class="icon"><i class="fas fa-cube"></i></div><div class="content"><strong>4. Digital Twin</strong><span>Virtual model for predictive maintenance & optimisation</span></div></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+            <div class="pv-text">
+                <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.8;">
+                    Solar PV 4.0 represents the evolution from standalone solar systems into intelligent,
+                    connected energy ecosystems that combine generation, infrastructure, intelligence,
+                    and a digital twin layer for predictive optimisation.
+                </p>
+                <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.8; margin-top: 1rem;">
+                    It’s not just about panels—it’s about building a smart, resilient, and data-driven
+                    energy future.
+                </p>
+            </div>
+            <div class="pv-diagram" style="background: rgba(255,255,255,0.02); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.05);">
+                <div class="layer" style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; margin-bottom: 0.8rem; border-left: 4px solid #16A34A; background: rgba(255,255,255,0.02); border-radius: 0 8px 8px 0;">
+                    <div class="icon" style="font-size: 1.6rem; color: #F97316; width: 40px; text-align: center;"><i class="fas fa-solar-panel"></i></div>
+                    <div class="content"><strong style="color: #e2e8f0;">1. Generation</strong><span style="color: #94a3b8; font-size: 0.9rem; display: block;">Solar PV arrays, hybrid inverters, BESS</span></div>
+                </div>
+                <div class="layer" style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; margin-bottom: 0.8rem; border-left: 4px solid #16A34A; background: rgba(255,255,255,0.02); border-radius: 0 8px 8px 0;">
+                    <div class="icon" style="font-size: 1.6rem; color: #F97316; width: 40px; text-align: center;"><i class="fas fa-cogs"></i></div>
+                    <div class="content"><strong style="color: #e2e8f0;">2. Infrastructure</strong><span style="color: #94a3b8; font-size: 0.9rem; display: block;">LV/MV networks, substations, protection</span></div>
+                </div>
+                <div class="layer" style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; margin-bottom: 0.8rem; border-left: 4px solid #16A34A; background: rgba(255,255,255,0.02); border-radius: 0 8px 8px 0;">
+                    <div class="icon" style="font-size: 1.6rem; color: #F97316; width: 40px; text-align: center;"><i class="fas fa-brain"></i></div>
+                    <div class="content"><strong style="color: #e2e8f0;">3. Intelligence</strong><span style="color: #94a3b8; font-size: 0.9rem; display: block;">Smart metering, monitoring, analytics, diagnostics</span></div>
+                </div>
+                <div class="layer" style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; margin-bottom: 0.8rem; border-left: 4px solid #16A34A; background: rgba(255,255,255,0.02); border-radius: 0 8px 8px 0;">
+                    <div class="icon" style="font-size: 1.6rem; color: #F97316; width: 40px; text-align: center;"><i class="fas fa-cube"></i></div>
+                    <div class="content"><strong style="color: #e2e8f0;">4. Digital Twin</strong><span style="color: #94a3b8; font-size: 0.9rem; display: block;">Simulation, predictive maintenance, optimisation</span></div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- 4. SOLUTIONS -->
-<section class="solutions-section" id="solutions">
+<!-- ===== SOLUTIONS, WHY, INDUSTRIES, VISION, CTA ===== -->
+<!-- (Keeping these sections as they were in your previous version, but they now inherit the new base styles) -->
+<section style="padding: 4rem 0; background: #0B0F1A; border-bottom: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
         <div class="section-title animate-on-scroll">
             <h2>Our <span>Solutions</span></h2>
             <p>Intelligent energy systems designed for tomorrow’s infrastructure</p>
         </div>
-        <div class="solutions-grid">
-            <div class="solution-card animate-on-scroll">
-                <div class="icon"><i class="fas fa-sun"></i></div>
-                <h3>Solar PV 4.0 Systems</h3>
-                <p>Smart hybrid systems with monitoring & optimisation for maximum yield.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div class="solution-card" style="background: rgba(255,255,255,0.02); padding: 2rem 1.5rem; border-radius: 16px; text-align: center; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 2.8rem; color: #F97316; margin-bottom: 1rem;"><i class="fas fa-sun"></i></div>
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #e2e8f0; font-size: 1.3rem;">Solar PV 4.0 Systems</h3>
+                <p style="color: #94a3b8; font-size: 0.95rem;">Smart hybrid systems with monitoring & optimisation.</p>
             </div>
-            <div class="solution-card animate-on-scroll">
-                <div class="icon"><i class="fas fa-bolt"></i></div>
-                <h3>Electrical Infrastructure</h3>
-                <p>LV/MV systems, substations, and commissioning services.</p>
+            <div class="solution-card" style="background: rgba(255,255,255,0.02); padding: 2rem 1.5rem; border-radius: 16px; text-align: center; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 2.8rem; color: #F97316; margin-bottom: 1rem;"><i class="fas fa-bolt"></i></div>
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #e2e8f0; font-size: 1.3rem;">Electrical Infrastructure</h3>
+                <p style="color: #94a3b8; font-size: 0.95rem;">LV/MV systems, substations, and commissioning.</p>
             </div>
-            <div class="solution-card animate-on-scroll">
-                <div class="icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Smart Grid & Monitoring</h3>
-                <p>Analytics, diagnostics, and real-time visibility across your energy assets.</p>
+            <div class="solution-card" style="background: rgba(255,255,255,0.02); padding: 2rem 1.5rem; border-radius: 16px; text-align: center; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 2.8rem; color: #F97316; margin-bottom: 1rem;"><i class="fas fa-chart-line"></i></div>
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #e2e8f0; font-size: 1.3rem;">Smart Grid & Monitoring</h3>
+                <p style="color: #94a3b8; font-size: 0.95rem;">Analytics, diagnostics, and real-time visibility.</p>
             </div>
-            <div class="solution-card animate-on-scroll">
-                <div class="icon"><i class="fas fa-drafting-compass"></i></div>
-                <h3>EPC & Consulting</h3>
-                <p>End-to-end design, procurement, construction, and operational support.</p>
+            <div class="solution-card" style="background: rgba(255,255,255,0.02); padding: 2rem 1.5rem; border-radius: 16px; text-align: center; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 2.8rem; color: #F97316; margin-bottom: 1rem;"><i class="fas fa-drafting-compass"></i></div>
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #e2e8f0; font-size: 1.3rem;">EPC & Consulting</h3>
+                <p style="color: #94a3b8; font-size: 0.95rem;">End-to-end design, procurement, and construction.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 5. WHY MAMOLOTO -->
-<section class="why-section">
+<!-- Why Mamoloto -->
+<section style="padding: 4rem 0; background: #0B0F1A; border-bottom: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
         <div class="section-title animate-on-scroll">
-            <h2>Why <span>Intelligent Infrastructure</span> Matters</h2>
-            <p>Key differentiators that set Mamoloto Technologies apart</p>
+            <h2>Why <span>Choose Us</span></h2>
         </div>
-        <div class="why-grid">
-            <div class="feature-card animate-on-scroll">
-                <h4><i class="fas fa-eye" style="color: #16A34A;"></i> Smart Monitoring</h4>
-                <p>Reduced downtime through real‑time alerts and performance tracking.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="feature-card" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #16A34A;">
+                <h4 style="color: #e2e8f0; margin-bottom: 0.3rem;"><i class="fas fa-eye" style="color: #16A34A;"></i> Smart Monitoring</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem;">Reduced downtime through real‑time alerts and performance tracking.</p>
             </div>
-            <div class="feature-card animate-on-scroll">
-                <h4><i class="fas fa-cubes" style="color: #16A34A;"></i> Digital Twin Systems</h4>
-                <p>Predictive maintenance that extends asset life and prevents failures.</p>
+            <div class="feature-card" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #16A34A;">
+                <h4 style="color: #e2e8f0; margin-bottom: 0.3rem;"><i class="fas fa-cubes" style="color: #16A34A;"></i> Digital Twin Systems</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem;">Predictive maintenance that extends asset life.</p>
             </div>
-            <div class="feature-card animate-on-scroll">
-                <h4><i class="fas fa-sync-alt" style="color: #16A34A;"></i> Hybrid Energy Systems</h4>
-                <p>Energy resilience through seamless integration of solar, storage, and grid.</p>
+            <div class="feature-card" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #16A34A;">
+                <h4 style="color: #e2e8f0; margin-bottom: 0.3rem;"><i class="fas fa-sync-alt" style="color: #16A34A;"></i> Hybrid Energy Systems</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem;">Energy resilience through seamless integration.</p>
             </div>
-            <div class="feature-card animate-on-scroll">
-                <h4><i class="fas fa-rocket" style="color: #16A34A;"></i> Integrated EPC Delivery</h4>
-                <p>Faster execution with a single point of accountability from design to operation.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 6. VISUAL SHOWCASE -->
-<section class="showcase-section">
-    <div class="container">
-        <div class="section-title animate-on-scroll">
-            <h2>Mamoloto <span>Solar PV 4.0™</span> Architecture</h2>
-            <p>Our signature intelligent energy ecosystem — the visual identity of the future.</p>
-        </div>
-        <div class="showcase-box animate-on-scroll">
-            <h2>🔷 Solar PV 4.0 Ecosystem</h2>
-            <p>Generation · Infrastructure · Intelligence · Digital Twin</p>
-            <div class="mock-diagram">
-                <div class="block"><i class="fas fa-solar-panel"></i> Generation</div>
-                <div class="block"><i class="fas fa-cogs"></i> Infrastructure</div>
-                <div class="block"><i class="fas fa-brain"></i> Intelligence</div>
-                <div class="block"><i class="fas fa-cube"></i> Digital Twin</div>
-            </div>
-            <div class="energy-line" style="width: 60%; margin: 1.5rem auto;"></div>
-            <div style="margin-top: 1rem; background: rgba(255,255,255,0.04); padding: 0.8rem 1.5rem; border-radius: 30px; display: inline-block; border: 1px solid rgba(22,163,74,0.2); color: #94a3b8;">
-                <i class="fas fa-arrow-right" style="color: #F97316;"></i> Your flagship infographic will live here
+            <div class="feature-card" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #16A34A;">
+                <h4 style="color: #e2e8f0; margin-bottom: 0.3rem;"><i class="fas fa-rocket" style="color: #16A34A;"></i> Integrated EPC Delivery</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem;">Faster execution from design to operation.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 7. INDUSTRIES -->
-<section class="industries-section">
+<!-- Industries -->
+<section style="padding: 4rem 0; background: #0B0F1A; border-bottom: 1px solid rgba(255,255,255,0.04);">
     <div class="container">
         <div class="section-title animate-on-scroll">
             <h2>Industries We <span>Serve</span></h2>
             <p>Tailored intelligent energy solutions across multiple sectors</p>
         </div>
-        <div class="industries-grid">
-            <div class="industry-item animate-on-scroll"><i class="fas fa-store"></i><span>Commercial</span></div>
-            <div class="industry-item animate-on-scroll"><i class="fas fa-factory"></i><span>Industrial</span></div>
-            <div class="industry-item animate-on-scroll"><i class="fas fa-hard-hat"></i><span>Mining</span></div>
-            <div class="industry-item animate-on-scroll"><i class="fas fa-home"></i><span>Residential Estates</span></div>
-            <div class="industry-item animate-on-scroll"><i class="fas fa-city"></i><span>Public Infrastructure</span></div>
-            <div class="industry-item animate-on-scroll"><i class="fas fa-bolt"></i><span>Utilities</span></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; text-align: center;">
+            <div class="industry-item" style="background: rgba(255,255,255,0.02); padding: 1.5rem 1rem; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <i class="fas fa-store" style="font-size: 2.2rem; color: #F97316; margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-weight: 600; color: #e2e8f0;">Commercial</span>
+            </div>
+            <div class="industry-item" style="background: rgba(255,255,255,0.02); padding: 1.5rem 1rem; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <i class="fas fa-industry" style="font-size: 2.2rem; color: #F97316; margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-weight: 600; color: #e2e8f0;">Industrial</span>
+            </div>
+            <div class="industry-item" style="background: rgba(255,255,255,0.02); padding: 1.5rem 1rem; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <i class="fas fa-hard-hat" style="font-size: 2.2rem; color: #F97316; margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-weight: 600; color: #e2e8f0;">Mining</span>
+            </div>
+            <div class="industry-item" style="background: rgba(255,255,255,0.02); padding: 1.5rem 1rem; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <i class="fas fa-home" style="font-size: 2.2rem; color: #F97316; margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-weight: 600; color: #e2e8f0;">Residential Estates</span>
+            </div>
+            <div class="industry-item" style="background: rgba(255,255,255,0.02); padding: 1.5rem 1rem; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <i class="fas fa-city" style="font-size: 2.2rem; color: #F97316; margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-weight: 600; color: #e2e8f0;">Public Infrastructure</span>
+            </div>
+            <div class="industry-item" style="background: rgba(255,255,255,0.02); padding: 1.5rem 1rem; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04);">
+                <i class="fas fa-bolt" style="font-size: 2.2rem; color: #F97316; margin-bottom: 0.5rem; display: block;"></i>
+                <span style="font-weight: 600; color: #e2e8f0;">Utilities</span>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- 8. STRATEGIC VISION -->
-<section class="vision-section">
+<!-- Vision -->
+<section style="background: #0B0F1A; padding: 4rem 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04);">
     <div class="container animate-on-scroll">
-        <h2>Building Africa’s <span>Intelligent Energy</span> Future</h2>
-        <p>
+        <h2 style="font-family: 'Montserrat', sans-serif; font-size: 2.4rem; font-weight: 800; color: #e2e8f0;">
+            Building Africa's <span style="color: #16A34A;">Intelligent Energy</span> Future
+        </h2>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; color: #94a3b8; line-height: 1.8;">
             Mamoloto Technologies is committed to advancing sustainability, intelligence, and resilience
-            across the continent. Through digital infrastructure and renewable integration, we are shaping
-            the energy landscape of tomorrow.
+            across the continent through digital infrastructure and renewable integration.
         </p>
         <div class="energy-line" style="max-width: 300px; margin: 1.5rem auto;"></div>
     </div>
 </section>
 
-<!-- 9. CTA -->
-<section class="cta-section">
+<!-- CTA -->
+<section style="background: linear-gradient(135deg, #0B0F1A, #1a2a1f); padding: 4rem 0; text-align: center; border-top: 1px solid rgba(22, 163, 74, 0.2);">
     <div class="container animate-on-scroll">
-        <h2>Let’s Build <span>Smarter Energy</span> Systems Together</h2>
-        <p>Reach out to discuss your project, request a consultation, or download our corporate profile.</p>
-        <div class="btn-group">
-            <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Contact Us</a>
-            <a href="/contact" class="btn btn-secondary"><i class="fas fa-phone"></i> Request Consultation</a>
+        <h2 style="font-family: 'Montserrat', sans-serif; font-size: 2.4rem; color: #e2e8f0;">
+            Let's Build <span style="color: #16A34A;">Smarter Energy</span> Systems Together
+        </h2>
+        <p style="color: #94a3b8; max-width: 600px; margin: 0.5rem auto 2rem; font-size: 1.1rem;">
+            Reach out to discuss your project, request a consultation, or download our corporate profile.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Free Consultation</a>
             <a href="/download-profile" class="btn btn-outline"><i class="fas fa-file-pdf"></i> Download Profile</a>
         </div>
     </div>

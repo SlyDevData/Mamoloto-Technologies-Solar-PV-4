@@ -3,15 +3,17 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
+import json
+from datetime import datetime
 
 app = Flask(__name__)
 
 # ---------- EMAIL CONFIG ----------
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SENDER_EMAIL = "mamoloto@tlabela.com"   
-SENDER_PASSWORD = "your-app-password"   # Replace with actual password
-RECEIVER_EMAIL = "mamoloto@tlabela.com"
+SENDER_EMAIL = "slycorporate@gmail.com"   
+SENDER_PASSWORD = "your-app-password"   # REPLACE with Gmail App Password
+RECEIVER_EMAIL = "slycorporate@gmail.com"
 
 def send_email_alert(name, email, phone, subject, message):
     try:
@@ -57,9 +59,17 @@ def about():
 def services():
     return render_template('services.html')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+        send_email_alert(name, email, phone, subject, message)
+        return render_template('contact.html', success=True)
+    return render_template('contact.html', success=False)
 
 # ----- NEW PAGES -----
 @app.route('/projects')
@@ -85,6 +95,45 @@ def research():
 @app.route('/academy')
 def academy():
     return render_template('academy.html')
+
+@app.route('/blog')
+def blog():
+    # Sample blog posts (in production, fetch from DB or markdown files)
+    posts = [
+        {
+            'title': 'The Future of AI in Solar PV 4.0',
+            'date': 'June 15, 2026',
+            'author': 'Dr. Mamoloto Tlabela',
+            'category': 'AI & Energy',
+            'excerpt': 'Artificial intelligence is transforming solar PV from static generation into dynamic, self-optimising energy systems...',
+            'slug': 'future-of-ai-solar-pv'
+        },
+        {
+            'title': 'Commissioning Guide for Hybrid Solar Systems',
+            'date': 'May 28, 2026',
+            'author': 'Engineering Team',
+            'category': 'Technical Guides',
+            'excerpt': 'A step-by-step approach to safely and efficiently commission hybrid solar PV systems in African conditions...',
+            'slug': 'commissioning-guide-hybrid-solar'
+        },
+        {
+            'title': 'Why Digital Twins Matter for African Utilities',
+            'date': 'May 10, 2026',
+            'author': 'Dr. Mamoloto Tlabela',
+            'category': 'Digital Twin',
+            'excerpt': 'Digital twins offer African utilities a powerful tool for predictive maintenance, grid stability, and operational efficiency...',
+            'slug': 'digital-twins-african-utilities'
+        },
+        {
+            'title': 'Microgrids: The Backbone of Energy Resilience',
+            'date': 'April 22, 2026',
+            'author': 'Research Team',
+            'category': 'Microgrids',
+            'excerpt': 'Hybrid microgrids combine solar, storage, and smart controls to deliver reliable power to remote communities and industrial sites...',
+            'slug': 'microgrids-energy-resilience'
+        }
+    ]
+    return render_template('blog.html', posts=posts)
 
 # ---------- STATIC PDF DOWNLOAD ----------
 @app.route('/download-profile')
