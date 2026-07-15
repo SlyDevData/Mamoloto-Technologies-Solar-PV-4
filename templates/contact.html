@@ -1,56 +1,127 @@
 {% extends "base.html" %}
 
-{% block title %}Contact - Mamoloto Technologies Solar PV 4.0{% endblock %}
+{% block title %}Contact � Intelligent Energy Systems{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+    .contact-card {
+        background: rgba(255,255,255,0.02);
+        backdrop-filter: blur(4px);
+        border-radius: 16px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+    .contact-card h3 { font-family: 'Montserrat', sans-serif; color: #e2e8f0; margin-bottom: 1.5rem; }
+    .contact-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+    }
+    .contact-info-item .icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(22, 163, 74, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #16A34A;
+        flex-shrink: 0;
+    }
+    .contact-info-item .detail { color: #94a3b8; }
+    .contact-info-item .detail strong { color: #e2e8f0; font-weight: 600; display: block; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; color: #e2e8f0; font-weight: 500; margin-bottom: 0.3rem; font-size: 0.9rem; }
+    .form-group input, .form-group textarea, .form-group select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 8px;
+        color: #e2e8f0;
+        font-size: 1rem;
+        transition: 0.3s;
+        font-family: 'Inter', sans-serif;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+        outline: none;
+        border-color: #16A34A;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        background: rgba(255,255,255,0.05);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select option { background: #0B0F1A; }
+    .alert-success {
+        background: rgba(22, 163, 74, 0.1);
+        border: 1px solid #16A34A;
+        color: #16A34A;
+        padding: 1rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+    @media (max-width: 992px) {
+        .contact-grid { grid-template-columns: 1fr; }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
 <section style="padding: 4rem 0;">
     <div class="container">
-        <div class="section-title">
+        <div class="section-title animate-on-scroll">
             <h2>Get In <span>Touch</span></h2>
-            <p>Have questions about solar PV? We're here to help. Reach out today.</p>
+            <p>Let�s build intelligent energy systems together</p>
         </div>
 
         {% if success %}
-        <div class="alert alert-success">
+        <div class="alert-success">
             <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i>
             <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you shortly.
         </div>
         {% endif %}
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
-            <!-- Contact Form -->
-            <div style="background: #fff; border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04);">
-                <h3 style="color: #1a3a2b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem;">
-                    <i class="fas fa-paper-plane" style="color: #f1c40f;"></i> Send a Message
-                </h3>
+        <div class="contact-grid">
+            <!-- Form -->
+            <div class="contact-card">
+                <h3><i class="fas fa-paper-plane" style="color: #F97316;"></i> Send a Message</h3>
                 <form method="POST" action="/contact">
                     <div class="form-group">
-                        <label for="name"><i class="fas fa-user" style="color: #f1c40f;"></i> Full Name</label>
+                        <label for="name"><i class="fas fa-user" style="color: #16A34A;"></i> Full Name</label>
                         <input type="text" id="name" name="name" required placeholder="Your full name">
                     </div>
                     <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope" style="color: #f1c40f;"></i> Email Address</label>
+                        <label for="email"><i class="fas fa-envelope" style="color: #16A34A;"></i> Email Address</label>
                         <input type="email" id="email" name="email" required placeholder="you@example.com">
                     </div>
                     <div class="form-group">
-                        <label for="phone"><i class="fas fa-phone" style="color: #f1c40f;"></i> Phone Number (optional)</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+27 12 012 5219">
+                        <label for="phone"><i class="fas fa-phone" style="color: #16A34A;"></i> Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+27 64 556 0041">
                     </div>
                     <div class="form-group">
-                        <label for="subject"><i class="fas fa-tag" style="color: #f1c40f;"></i> Subject</label>
+                        <label for="subject"><i class="fas fa-tag" style="color: #16A34A;"></i> Subject</label>
                         <select id="subject" name="subject">
                             <option value="">Select a subject...</option>
                             <option value="general">General Inquiry</option>
                             <option value="quote">Request a Quote</option>
-                            <option value="installation">Solar Installation</option>
-                            <option value="upgrade">System Upgrade</option>
-                            <option value="maintenance">Maintenance & Support</option>
+                            <option value="installation">Solar PV 4.0 System</option>
+                            <option value="infrastructure">Electrical Infrastructure</option>
+                            <option value="smart">Smart Grid & Monitoring</option>
+                            <option value="consulting">Consulting</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message"><i class="fas fa-comment" style="color: #f1c40f;"></i> Message</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="Tell us about your solar energy needs..."></textarea>
+                        <label for="message"><i class="fas fa-comment" style="color: #16A34A;"></i> Message</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tell us about your energy infrastructure needs..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
                         <i class="fas fa-paper-plane"></i> Send Message
@@ -60,81 +131,58 @@
 
             <!-- Contact Info -->
             <div>
-                <div style="background: #fff; border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); margin-bottom: 2rem;">
-                    <h3 style="color: #1a3a2b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem;">
-                        <i class="fas fa-address-card" style="color: #f1c40f;"></i> Contact Information
-                    </h3>
-                    <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-                        <!-- Phone -->
-                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(241,196,15,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f1c40f; flex-shrink: 0;">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.8rem; color: #718096;">Phone</div>
-                                <div style="font-weight: 500;">+27 12 012 5219</div>
-                                <div style="font-weight: 500;">+27 84 607 5129</div>
-                                <div style="font-size: 0.9rem; color: #718096;">Fax: 086 476 7443</div>
-                            </div>
+                <div class="contact-card" style="margin-bottom: 2rem;">
+                    <h3><i class="fas fa-address-card" style="color: #F97316;"></i> Contact Information</h3>
+                    <div class="contact-info-item">
+                        <div class="icon"><i class="fas fa-phone"></i></div>
+                        <div class="detail">
+                            <strong>Phone</strong>
+                            +27 64 556 0041<br>
+                            +27 84 607 5129<br>
+                            <span style="font-size: 0.9rem; color: #64748b;">Fax: +27 (0) 86 476 7443</span>
                         </div>
-                        <!-- Email -->
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(241,196,15,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f1c40f; flex-shrink: 0;">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.8rem; color: #718096;">Email</div>
-                                <div style="font-weight: 500;"><a href="mailto:mamoloto@tlabela.com" style="color: #1a3a2b;">mamoloto@tlabela.com</a></div>
-                            </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div class="detail">
+                            <strong>Email</strong>
+                            <a href="mailto:mamoloto@tlabela.com" style="color: #16A34A;">mamoloto@tlabela.com</a>
                         </div>
-                        <!-- Physical Address -->
-                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(241,196,15,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f1c40f; flex-shrink: 0;">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.8rem; color: #718096;">Physical Address</div>
-                                <div style="font-weight: 500; line-height: 1.6;">Unit 22, Village 1, Silver Willow, 0081</div>
-                            </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="detail">
+                            <strong>Physical Address</strong>
+                            Unit 22, Village 1, Silver Willow, 0081
                         </div>
-                        <!-- Postal Address -->
-                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(241,196,15,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f1c40f; flex-shrink: 0;">
-                                <i class="fas fa-mail-bulk"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.8rem; color: #718096;">Postal Address</div>
-                                <div style="font-weight: 500; line-height: 1.6;">Private Bag X4, 3 @ 1, Suit 16, Silver Lakes, Pretoria, 0054</div>
-                            </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="icon"><i class="fas fa-mail-bulk"></i></div>
+                        <div class="detail">
+                            <strong>Postal Address</strong>
+                            Private Bag X4, 3 @ 1, Suit 16, Silver Lakes, Pretoria, 0054
                         </div>
-                        <!-- Social & Links -->
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(241,196,15,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f1c40f; flex-shrink: 0;">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.8rem; color: #718096;">Online</div>
-                                <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.2rem;">
-                                    <a href="https://linkedin.com/company/mamoloto-technologies" target="_blank" style="color: #1a3a2b; font-weight: 500; font-size: 0.9rem;"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                                    <a href="https://g.page/MamolotoTechnologies" target="_blank" style="color: #1a3a2b; font-weight: 500; font-size: 0.9rem;"><i class="fas fa-map-pin"></i> Google Maps</a>
-                                    <a href="https://mamoloto-technologies-pty-ltd.business.site/" target="_blank" style="color: #1a3a2b; font-weight: 500; font-size: 0.9rem;"><i class="fas fa-store"></i> Business Site</a>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="icon"><i class="fas fa-globe"></i></div>
+                        <div class="detail">
+                            <strong>Online</strong>
+                            <a href="https://www.tlabela.com" target="_blank" style="color: #16A34A;">www.tlabela.com</a><br>
+                            <a href="https://g.page/MamolotoTechnologies" target="_blank" style="color: #16A34A;">Google Maps</a> 
+                            <a href="https://linkedin.com/company/mamoloto-technologies" target="_blank" style="color: #16A34A;">LinkedIn</a> 
+                            <a href="https://twitter.com/MamolotoTech" target="_blank" style="color: #16A34A;">@MamolotoTech</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- CTA Box -->
-                <div style="background: #1a3a2b; border-radius: 16px; padding: 2rem; color: #fff; text-align: center;">
-                    <div style="font-size: 2.5rem; color: #f1c40f; margin-bottom: 0.5rem;">
-                        <i class="fas fa-sun"></i>
-                    </div>
-                    <h4 style="color: #f1c40f; font-size: 1.1rem;">Ready to Go Solar?</h4>
-                    <p style="color: #a0c4b0; font-size: 0.95rem; margin-top: 0.5rem;">
-                        Serving residential, commercial, and industrial clients across South Africa.
+                <div style="background: rgba(255,255,255,0.02); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.04); text-align: center;">
+                    <div style="font-size: 2.5rem; color: #F97316; margin-bottom: 0.5rem;"><i class="fas fa-sun"></i></div>
+                    <h4 style="font-family: 'Montserrat', sans-serif; color: #e2e8f0;">Ready to build smarter energy?</h4>
+                    <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem;">
+                        Serving residential, commercial, industrial, and mining sectors.
                     </p>
-                    <a href="mailto:mamoloto@tlabela.com" class="btn btn-primary" style="margin-top: 1rem; background: #f1c40f; color: #1a3a2b;">
-                        <i class="fas fa-envelope"></i> Email Us Directly
+                    <a href="mailto:mamoloto@tlabela.com" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-envelope"></i> Email Directly
                     </a>
                 </div>
             </div>

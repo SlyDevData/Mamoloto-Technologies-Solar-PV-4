@@ -1,129 +1,797 @@
 {% extends "base.html" %}
 
-{% block title %}Services - Mamoloto Technologies Solar PV 4.0{% endblock %}
+{% block title %}Services • Intelligent Energy Solutions – Solar PV 4.0™{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ---------- ANIMATED ENERGY FLOW ---------- */
+    .flow-container {
+        background: rgba(255,255,255,0.02);
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        border: 1px solid rgba(255,255,255,0.04);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 3rem;
+    }
+
+        .flow-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(22, 163, 74, 0.03) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+    .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .flow-step {
+        text-align: center;
+        padding: 1.5rem 1rem;
+        background: rgba(255,255,255,0.02);
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.04);
+        transition: all 0.4s ease;
+        position: relative;
+    }
+
+        .flow-step:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(22, 163, 74, 0.4);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .flow-step .icon {
+            font-size: 2.8rem;
+            color: #F97316;
+            margin-bottom: 0.5rem;
+            display: block;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        .flow-step:nth-child(2) .icon {
+            animation-delay: 0.3s;
+        }
+
+        .flow-step:nth-child(3) .icon {
+            animation-delay: 0.6s;
+        }
+
+        .flow-step:nth-child(4) .icon {
+            animation-delay: 0.9s;
+        }
+
+    @keyframes iconFloat {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    .flow-step .step-number {
+        display: inline-block;
+        background: rgba(22, 163, 74, 0.15);
+        color: #16A34A;
+        font-weight: 700;
+        font-size: 0.8rem;
+        padding: 0.2rem 0.8rem;
+        border-radius: 20px;
+        margin-bottom: 0.5rem;
+    }
+
+    .flow-step h4 {
+        color: #e2e8f0;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 0.3rem;
+    }
+
+    .flow-step p {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+    /* Animated connecting lines */
+    .flow-connector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #16A34A;
+        font-size: 1.5rem;
+        animation: pulseArrow 1.5s infinite;
+    }
+
+    @keyframes pulseArrow {
+        0%, 100% {
+            opacity: 0.3;
+            transform: translateX(0);
+        }
+
+        50% {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+    }
+
+    @media (max-width: 992px) {
+        .flow-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .flow-connector {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .flow-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ---------- PRICING PACKAGES ---------- */
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .pricing-card {
+        background: rgba(255,255,255,0.02);
+        backdrop-filter: blur(8px);
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        border: 1px solid rgba(255,255,255,0.04);
+        text-align: center;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(22, 163, 74, 0.3);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .pricing-card.featured {
+            border-color: #16A34A;
+            background: rgba(22, 163, 74, 0.05);
+        }
+
+            .pricing-card.featured::before {
+                content: '★ RECOMMENDED';
+                position: absolute;
+                top: 12px;
+                right: -30px;
+                background: #16A34A;
+                color: #0B0F1A;
+                font-size: 0.7rem;
+                font-weight: 700;
+                padding: 0.2rem 2.5rem;
+                transform: rotate(45deg);
+                letter-spacing: 1px;
+            }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #16A34A;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0.5rem 0;
+        }
+
+            .pricing-card .price span {
+                font-size: 1rem;
+                color: #94a3b8;
+                font-weight: 400;
+            }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+            .pricing-card ul li {
+                padding: 0.5rem 0;
+                color: #94a3b8;
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                border-bottom: 1px solid rgba(255,255,255,0.04);
+            }
+
+                .pricing-card ul li i {
+                    color: #16A34A;
+                    width: 20px;
+                }
+
+        .pricing-card .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+    /* ---------- ORGANISATIONAL STRUCTURE ---------- */
+    .org-container {
+        background: rgba(255,255,255,0.02);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255,255,255,0.04);
+        margin-top: 3rem;
+        overflow-x: auto;
+    }
+
+    .org-tree {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 700px;
+    }
+
+    .org-level {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 0.5rem 0;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .org-node {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px;
+        padding: 0.8rem 1.2rem;
+        min-width: 140px;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: default;
+    }
+
+        .org-node:hover {
+            transform: translateY(-4px);
+            border-color: #16A34A;
+            background: rgba(22, 163, 74, 0.05);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .org-node .title {
+            color: #e2e8f0;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .org-node .subtitle {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            margin-top: 0.2rem;
+        }
+
+        .org-node .icon {
+            color: #F97316;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .org-node.leader {
+            border-color: #F97316;
+            background: rgba(249, 115, 22, 0.05);
+            min-width: 200px;
+        }
+
+            .org-node.leader .title {
+                color: #F97316;
+            }
+
+    .org-connector {
+        color: #16A34A;
+        font-size: 1.2rem;
+        opacity: 0.3;
+        text-align: center;
+        padding: 0.2rem 0;
+        animation: pulseArrow 2s infinite;
+    }
+
+    .org-label {
+        color: #64748b;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-align: center;
+        margin: 0.5rem 0 0.2rem;
+        width: 100%;
+    }
+
+    /* ---------- ANIMATED SERVICE CARDS ---------- */
+    .service-card {
+        background: rgba(255,255,255,0.02);
+        backdrop-filter: blur(4px);
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.04);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #16A34A, #F97316, transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(22, 163, 74, 0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .service-card .icon {
+            font-size: 2.8rem;
+            color: #F97316;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        .service-card:nth-child(2) .icon {
+            animation-delay: 0.2s;
+        }
+
+        .service-card:nth-child(3) .icon {
+            animation-delay: 0.4s;
+        }
+
+        .service-card:nth-child(4) .icon {
+            animation-delay: 0.6s;
+        }
+
+        .service-card:nth-child(5) .icon {
+            animation-delay: 0.8s;
+        }
+
+        .service-card:nth-child(6) .icon {
+            animation-delay: 1s;
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #e2e8f0;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+
+            .service-card ul li {
+                padding: 0.3rem 0;
+                color: #94a3b8;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.95rem;
+            }
+
+                .service-card ul li i {
+                    color: #16A34A;
+                    width: 18px;
+                }
+
+    /* ---------- EXPAND SECTION ---------- */
+    .expand-section {
+        margin-top: 3rem;
+        background: rgba(255,255,255,0.02);
+        border-radius: 16px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255,255,255,0.04);
+        text-align: center;
+    }
+
+        .expand-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #e2e8f0;
+        }
+
+        .expand-section p {
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0.5rem auto;
+        }
+
+    .expand-icons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+        .expand-icons .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+            .expand-icons .item:hover {
+                transform: scale(1.1);
+                color: #16A34A;
+            }
+
+            .expand-icons .item i {
+                font-size: 2.5rem;
+                color: #F97316;
+                margin-bottom: 0.3rem;
+            }
+</style>
+{% endblock %}
 
 {% block content %}
 <section style="padding: 4rem 0;">
     <div class="container">
-        <div class="section-title">
-            <h2>Our <span>Services</span></h2>
-            <p>Comprehensive solar PV solutions, from manufacturing to installation and beyond.</p>
+        <div class="section-title animate-on-scroll">
+            <h2>Our <span>Solutions</span></h2>
+            <p>End-to-end intelligent energy offerings for the built environment</p>
         </div>
 
-        <div class="grid-3">
-            <div class="card">
-                <div class="icon"><i class="fas fa-industry"></i></div>
-                <h3>Solar PV Manufacturing</h3>
-                <p>
-                    We manufacture high-quality solar photovoltaic products designed for durability and maximum
-                    efficiency in South Africa's diverse climate conditions.
-                </p>
-                <ul style="margin-top: 1rem; list-style: none; padding: 0;">
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> High-efficiency solar panels
-                    </li>
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> Durable, weather-resistant materials
-                    </li>
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> Quality assured manufacturing processes
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="icon"><i class="fas fa-tools"></i></div>
-                <h3>Solar PV Installation</h3>
-                <p>
-                    Professional installation services for residential, commercial, and industrial properties
-                    across South Africa, ensuring optimal performance and safety.
-                </p>
-                <ul style="margin-top: 1rem; list-style: none; padding: 0;">
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> Residential rooftop systems
-                    </li>
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> Commercial & industrial installations
-                    </li>
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> Safe, contained systems to prevent copper theft
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="icon"><i class="fas fa-sync-alt"></i></div>
-                <h3>System Upgrades & Maintenance</h3>
-                <p>
-                    Upgrade your existing solar systems for improved performance and longevity, with ongoing
-                    maintenance and support.
-                </p>
-                <ul style="margin-top: 1rem; list-style: none; padding: 0;">
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> Performance optimization
-                    </li>
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> System monitoring & diagnostics
-                    </li>
-                    <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-check" style="color: #f1c40f;"></i> Integration with wind & other renewables
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- EPC Section -->
-        <div style="margin-top: 3rem; background: #f7fafc; border-radius: 16px; padding: 2.5rem;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;">
-                <div>
-                    <h3 style="color: #1a3a2b; font-size: 1.6rem; margin-bottom: 0.5rem;">
-                        <i class="fas fa-hard-hat" style="color: #f1c40f;"></i> EPC Services
-                    </h3>
-                    <p style="color: #4a5568; font-size: 1.05rem; line-height: 1.8;">
-                        As an Engineering, Procurement and Construction company, we deliver turnkey solar projects
-                        from feasibility to operation.
-                    </p>
-                    <ul style="margin-top: 1rem; list-style: none; padding: 0;">
-                        <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem;">
-                            <i class="fas fa-check-circle" style="color: #f1c40f;"></i> Feasibility studies & site assessment
-                        </li>
-                        <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem;">
-                            <i class="fas fa-check-circle" style="color: #f1c40f;"></i> System design & engineering
-                        </li>
-                        <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem;">
-                            <i class="fas fa-check-circle" style="color: #f1c40f;"></i> Procurement of quality components
-                        </li>
-                        <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem;">
-                            <i class="fas fa-check-circle" style="color: #f1c40f;"></i> Construction & project management
-                        </li>
-                        <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem;">
-                            <i class="fas fa-check-circle" style="color: #f1c40f;"></i> Commissioning & handover
-                        </li>
-                    </ul>
-                </div>
-                <div style="background: #1a3a2b; border-radius: 12px; padding: 2rem; color: #fff; text-align: center;">
-                    <div style="font-size: 3rem; color: #f1c40f; margin-bottom: 1rem;">
-                        <i class="fas fa-solar-panel"></i>
-                    </div>
-                    <h4 style="color: #f1c40f; font-size: 1.2rem;">End-to-End Solar Solutions</h4>
-                    <p style="color: #a0c4b0; font-size: 0.95rem; margin-top: 0.5rem;">
-                        From feasibility to operation, we handle it all.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Future Expansion -->
-        <div style="margin-top: 3rem; text-align: center; background: linear-gradient(135deg, #1a3a2b, #2d5a3d); border-radius: 16px; padding: 3rem 2rem; color: #fff;">
-            <h3 style="font-size: 1.6rem; margin-bottom: 0.5rem;">
-                <i class="fas fa-rocket" style="color: #f1c40f;"></i> Expanding Beyond Solar
+        <!-- ===== ANIMATED ENERGY FLOW ===== -->
+        <div class="flow-container animate-on-scroll">
+            <h3 style="text-align: center; color: #e2e8f0; font-family: 'Montserrat', sans-serif; margin-bottom: 1.5rem;">
+                <i class="fas fa-bolt" style="color: #F97316;"></i> Solar PV 4.0 Energy Flow
             </h3>
-            <p style="color: #a0c4b0; max-width: 600px; margin: 0 auto; font-size: 1.05rem;">
-                Mamoloto Technologies plans to diversify into <strong style="color: #f1c40f;">wind energy</strong>,
-                <strong style="color: #f1c40f;">ocean wave energy</strong>, and
-                <strong style="color: #f1c40f;">green hydrogen</strong>  building a comprehensive renewable
-                energy ecosystem for South Africa.
+            <div class="flow-grid">
+                <div class="flow-step">
+                    <span class="step-number">STEP 1</span>
+                    <span class="icon"><i class="fas fa-sun"></i></span>
+                    <h4>Generation</h4>
+                    <p>Solar PV arrays & hybrid inverters</p>
+                </div>
+                <div class="flow-step">
+                    <span class="step-number">STEP 2</span>
+                    <span class="icon"><i class="fas fa-bolt"></i></span>
+                    <h4>Infrastructure</h4>
+                    <p>LV/MV networks & protection</p>
+                </div>
+                <div class="flow-step">
+                    <span class="step-number">STEP 3</span>
+                    <span class="icon"><i class="fas fa-brain"></i></span>
+                    <h4>Intelligence</h4>
+                    <p>Monitoring, analytics & control</p>
+                </div>
+                <div class="flow-step">
+                    <span class="step-number">STEP 4</span>
+                    <span class="icon"><i class="fas fa-cube"></i></span>
+                    <h4>Digital Twin</h4>
+                    <p>Simulation & predictive maintenance</p>
+                </div>
+            </div>
+            <div class="energy-line" style="margin: 1.5rem auto; max-width: 80%;"></div>
+            <p style="text-align: center; color: #64748b; font-size: 0.9rem;">
+                <i class="fas fa-arrow-right" style="color: #16A34A;"></i>
+                Intelligent, connected, self-optimising energy systems
             </p>
+        </div>
+
+        <!-- ===== SERVICE CARDS (with icons & animations) ===== -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="service-card animate-on-scroll">
+                <span class="icon"><i class="fas fa-sun"></i></span>
+                <h3>Solar PV 4.0 Systems</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> Solar PV design & EPC</li>
+                    <li><i class="fas fa-check"></i> Hybrid / Off-grid / Grid-tied</li>
+                    <li><i class="fas fa-check"></i> Battery storage integration</li>
+                    <li><i class="fas fa-check"></i> Smart monitoring platforms</li>
+                    <li><i class="fas fa-check"></i> Digital twin optimisation</li>
+                </ul>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <span class="icon"><i class="fas fa-bolt"></i></span>
+                <h3>Electrical Infrastructure</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> LV/MV installations up to 33kV+</li>
+                    <li><i class="fas fa-check"></i> Mini substations & transformers</li>
+                    <li><i class="fas fa-check"></i> Network protection</li>
+                    <li><i class="fas fa-check"></i> Commissioning & testing</li>
+                </ul>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <span class="icon"><i class="fas fa-chart-line"></i></span>
+                <h3>Smart Grid & Intelligence</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> Advanced Metering Infrastructure (AMI)</li>
+                    <li><i class="fas fa-check"></i> Grid monitoring & analytics</li>
+                    <li><i class="fas fa-check"></i> Load & demand profiling</li>
+                    <li><i class="fas fa-check"></i> Grid stability optimisation</li>
+                </ul>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <span class="icon"><i class="fas fa-microchip"></i></span>
+                <h3>ICT & Digital Systems</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> IoT-enabled monitoring</li>
+                    <li><i class="fas fa-check"></i> SCADA systems</li>
+                    <li><i class="fas fa-check"></i> Remote diagnostics & control</li>
+                    <li><i class="fas fa-check"></i> I-EMS automation</li>
+                </ul>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <span class="icon"><i class="fas fa-drafting-compass"></i></span>
+                <h3>Engineering Consulting</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> Network planning (LV/MV)</li>
+                    <li><i class="fas fa-check"></i> Energy audits & certificates</li>
+                    <li><i class="fas fa-check"></i> Maintenance strategy design</li>
+                    <li><i class="fas fa-check"></i> System modelling & simulation</li>
+                </ul>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <span class="icon"><i class="fas fa-hard-hat"></i></span>
+                <h3>EPC & Project Delivery</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> Feasibility & design</li>
+                    <li><i class="fas fa-check"></i> Procurement & construction</li>
+                    <li><i class="fas fa-check"></i> Quality assurance & testing</li>
+                    <li><i class="fas fa-check"></i> Operational handover</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ===== PRICING PACKAGES ===== -->
+        <div style="margin-top: 4rem;">
+            <div class="section-title animate-on-scroll">
+                <h2>Pricing <span>Packages</span></h2>
+                <p>Flexible solutions tailored to your energy needs</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Basic -->
+                <div class="pricing-card animate-on-scroll">
+                    <h4 style="color: #e2e8f0; font-family: 'Montserrat', sans-serif;">Solar PV 4.0</h4>
+                    <div class="price">R 85,000 <span>+ VAT</span></div>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Residential Starter</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 3kW Solar PV System</li>
+                        <li><i class="fas fa-check"></i> 5kWh Battery Storage</li>
+                        <li><i class="fas fa-check"></i> Hybrid Inverter</li>
+                        <li><i class="fas fa-check"></i> Basic Monitoring</li>
+                        <li><i class="fas fa-check"></i> Installation & Commissioning</li>
+                    </ul>
+                    <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get Quote</a>
+                </div>
+
+                <!-- Featured / Commercial -->
+                <div class="pricing-card featured animate-on-scroll">
+                    <h4 style="color: #e2e8f0; font-family: 'Montserrat', sans-serif;">Solar PV 4.0 AI</h4>
+                    <div class="price">R 250,000 <span>+ VAT</span></div>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Commercial Intelligence</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 10kW Solar PV System</li>
+                        <li><i class="fas fa-check"></i> 15kWh Battery Storage</li>
+                        <li><i class="fas fa-check"></i> AI-Powered Inverter</li>
+                        <li><i class="fas fa-check"></i> Smart Monitoring & Analytics</li>
+                        <li><i class="fas fa-check"></i> Digital Twin Integration</li>
+                        <li><i class="fas fa-check"></i> Predictive Maintenance</li>
+                        <li><i class="fas fa-check"></i> Full EPC Delivery</li>
+                    </ul>
+                    <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get Quote</a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card animate-on-scroll">
+                    <h4 style="color: #e2e8f0; font-family: 'Montserrat', sans-serif;">Solar PV 4.0 Enterprise</h4>
+                    <div class="price">R 550,000 <span>+ VAT</span></div>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Industrial / Mining</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 25kW+ Solar PV System</li>
+                        <li><i class="fas fa-check"></i> 30kWh+ Battery Storage</li>
+                        <li><i class="fas fa-check"></i> LV/MV Integration</li>
+                        <li><i class="fas fa-check"></i> SCADA & Automation</li>
+                        <li><i class="fas fa-check"></i> Full Digital Twin</li>
+                        <li><i class="fas fa-check"></i> 24/7 Remote Monitoring</li>
+                        <li><i class="fas fa-check"></i> 5-Year Maintenance Plan</li>
+                    </ul>
+                    <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get Quote</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ORGANISATIONAL STRUCTURE ===== -->
+        <div style="margin-top: 4rem;">
+            <div class="section-title animate-on-scroll">
+                <h2>Our <span>Organisational Structure</span></h2>
+                <p>Built for delivery. Driven by intelligence. Designed for impact.</p>
+            </div>
+            <div class="org-container animate-on-scroll">
+                <div class="org-tree">
+                    <!-- Managing Director -->
+                    <div class="org-level">
+                        <div class="org-node leader">
+                            <span class="icon"><i class="fas fa-user-tie"></i></span>
+                            <div class="title">Managing Director</div>
+                            <div class="subtitle">Leadership • Strategy • Performance • Growth</div>
+                        </div>
+                    </div>
+                    <div class="org-connector"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- Level 2: Strategy & Innovation, Admin, Finance -->
+                    <div class="org-label">Strategy & Operations</div>
+                    <div class="org-level">
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-lightbulb"></i></span>
+                            <div class="title">Strategy & Innovation</div>
+                            <div class="subtitle">Corporate Strategy • Innovation • Transformation</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-clipboard-list"></i></span>
+                            <div class="title">Office Administration</div>
+                            <div class="subtitle">Executive Support • Governance</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-coins"></i></span>
+                            <div class="title">Finance & Administration</div>
+                            <div class="subtitle">Finance • Accounting • Invoicing</div>
+                        </div>
+                    </div>
+                    <div class="org-connector"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- Level 3: Engineering & Project Delivery -->
+                    <div class="org-label">Engineering & Project Delivery</div>
+                    <div class="org-level">
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-sun"></i></span>
+                            <div class="title">Solar PV Systems</div>
+                            <div class="subtitle">Design • Installation • Commissioning</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-bolt"></i></span>
+                            <div class="title">LV/MV Infrastructure</div>
+                            <div class="subtitle">Networks • Substations • Protection</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-industry"></i></span>
+                            <div class="title">Manufacturing & Assembly</div>
+                            <div class="subtitle">Panel Assembly • System Integration</div>
+                        </div>
+                    </div>
+                    <div class="org-level">
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-users"></i></span>
+                            <div class="title">Field Team 1</div>
+                            <div class="subtitle">3+ Technicians</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-users"></i></span>
+                            <div class="title">Field Team 2</div>
+                            <div class="subtitle">3+ Technicians</div>
+                        </div>
+                    </div>
+                    <div class="org-connector"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- Level 4: Intelligence & Digital Systems -->
+                    <div class="org-label">Intelligence & Digital Systems</div>
+                    <div class="org-level">
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-cube"></i></span>
+                            <div class="title">Digital Twin & Modelling</div>
+                            <div class="subtitle">Simulation • Performance Optimisation</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-chart-pie"></i></span>
+                            <div class="title">Monitoring & Analytics</div>
+                            <div class="subtitle">Real-time Monitoring • Dashboards</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-server"></i></span>
+                            <div class="title">SCADA & Automation</div>
+                            <div class="subtitle">SCADA • PLC • HMI • Remote Control</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-wifi"></i></span>
+                            <div class="title">IoT & Connected Systems</div>
+                            <div class="subtitle">IoT Devices • Edge Computing • Sensors</div>
+                        </div>
+                    </div>
+                    <div class="org-connector"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- Level 5: Commercial & Business Excellence -->
+                    <div class="org-label">Commercial & Business Excellence</div>
+                    <div class="org-level">
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-bullhorn"></i></span>
+                            <div class="title">Marketing & Business Dev</div>
+                            <div class="subtitle">Brand • Proposals • Client Relations</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-handshake"></i></span>
+                            <div class="title">Sales & Customer Solutions</div>
+                            <div class="subtitle">Sales Strategy • Account Management</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-truck"></i></span>
+                            <div class="title">Procurement & SCM</div>
+                            <div class="subtitle">Supply Chain • Contracts • Inventory</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-file-signature"></i></span>
+                            <div class="title">Contracts & Tenders</div>
+                            <div class="subtitle">Bid Management • Tendering</div>
+                        </div>
+                    </div>
+                    <div class="org-connector"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- Level 6: QHSE & Operational Excellence -->
+                    <div class="org-label">QHSE & Operational Excellence</div>
+                    <div class="org-level">
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-shield-alt"></i></span>
+                            <div class="title">QHSE Compliance</div>
+                            <div class="subtitle">Policies • Audits • Legal Compliance</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-hard-hat"></i></span>
+                            <div class="title">Safety Management</div>
+                            <div class="subtitle">Risk Management • HSE Programs</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <div class="title">Quality Assurance</div>
+                            <div class="subtitle">Quality Control • Inspections</div>
+                        </div>
+                        <div class="org-node">
+                            <span class="icon"><i class="fas fa-tools"></i></span>
+                            <div class="title">Plant, Tools & Fleet</div>
+                            <div class="subtitle">Plant Management • Fleet Maintenance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUTURE EXPANSION ===== -->
+        <div class="expand-section animate-on-scroll">
+            <h3><i class="fas fa-rocket" style="color: #F97316;"></i> Beyond Solar – Future Energy</h3>
+            <p>
+                Mamoloto Technologies is actively diversifying into <strong>wind energy</strong>,
+                <strong>ocean wave</strong>, and <strong>green hydrogen</strong>—building a comprehensive
+                renewable intelligence platform for Africa.
+            </p>
+            <div class="expand-icons">
+                <div class="item"><i class="fas fa-wind"></i><span>Wind Energy</span></div>
+                <div class="item"><i class="fas fa-water"></i><span>Ocean Wave</span></div>
+                <div class="item"><i class="fas fa-flask"></i><span>Green Hydrogen</span></div>
+                <div class="item"><i class="fas fa-microchip"></i><span>AI Energy Management</span></div>
+            </div>
+            <div class="energy-line" style="max-width: 200px; margin: 1.5rem auto;"></div>
         </div>
     </div>
 </section>

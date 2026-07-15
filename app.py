@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, send_file, send_from_directory
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -6,42 +6,33 @@ import os
 
 app = Flask(__name__)
 
-# ---------- EMAIL CONFIGURATION ----------
-# IMPORTANT: To send real emails, replace the placeholders below with your SMTP details.
-# If you use Gmail, you need an App Password (not your regular password).
-# If you leave this as is, the form will still print the message in the terminal.
-
-SMTP_SERVER = "smtp.gmail.com"        # For Gmail. For Outlook: "smtp.office365.com"
-SMTP_PORT = 587                       # 587 for TLS
-SENDER_EMAIL = "slycorporate@gmail.com" # Replace with your sending email
-SENDER_PASSWORD = "Smtla9302" # Replace with your App Password / SMTP password
-RECEIVER_EMAIL = "slycorporate@gmail.com" # Where the form emails go
+# ---------- EMAIL CONFIG ----------
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+SENDER_EMAIL = "mamoloto@tlabela.com"   # Replace with your sending email
+SENDER_PASSWORD = "your-app-password"   # REPLACE with your actual App Password
+RECEIVER_EMAIL = "mamoloto@tlabela.com"
 
 def send_email_alert(name, email, phone, subject, message):
-    """Send an email notification to the company."""
     try:
         msg = MIMEMultipart()
         msg['From'] = SENDER_EMAIL
         msg['To'] = RECEIVER_EMAIL
-        msg['Subject'] = f"New Contact Form: {subject if subject else 'Inquiry'}"
+        msg['Subject'] = f"New Contact: {subject if subject else 'Inquiry'}"
 
         body = f"""
-        New message from the Mamoloto Technologies website:
+        New message from Mamoloto Technologies website:
 
         Name: {name}
         Email: {email}
         Phone: {phone if phone else 'Not provided'}
-        Subject: {subject if subject else 'General Inquiry'}
+        Subject: {subject if subject else 'General'}
 
         Message:
         {message}
-
-        ---
-        This email was sent automatically via the website contact form.
         """
         msg.attach(MIMEText(body, 'plain'))
 
-        # Connect to SMTP server and send
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
@@ -49,11 +40,9 @@ def send_email_alert(name, email, phone, subject, message):
         server.quit()
         return True
     except Exception as e:
-        # If email fails (e.g., missing credentials), fallback to console log
-        print(f"=== CONTACT FORM SUBMISSION (Email failed: {e}) ===")
-        print(f"Name: {name}\nEmail: {email}\nPhone: {phone}\nSubject: {subject}\nMessage: {message}")
+        print(f"Form submission (email failed): {e}")
+        print(f"Name: {name}, Email: {email}, Message: {message}")
         return False
-
 
 @app.route('/')
 def home():
@@ -75,14 +64,15 @@ def contact():
         phone = request.form.get('phone')
         subject = request.form.get('subject')
         message = request.form.get('message')
-
-        # Try to send the email
-        sent = send_email_alert(name, email, phone, subject, message)
-        
-        # You can check `sent` to show a specific success/failure message if you want
+        send_email_alert(name, email, phone, subject, message)
         return render_template('contact.html', success=True)
-
     return render_template('contact.html', success=False)
+
+# ---------- STATIC PDF DOWNLOAD ----------
+@app.route('/download-profile')
+def download_profile():
+    # This serves the PDF from the 'static' folder
+    return send_from_directory('static', 'Mamoloto_Technologies_Profile.pdf', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

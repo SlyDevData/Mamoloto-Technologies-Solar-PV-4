@@ -1,96 +1,297 @@
 {% extends "base.html" %}
 
-{% block title %}About - Mamoloto Technologies Solar PV 4.0{% endblock %}
+{% block title %}About • Intelligent Energy Systems – Solar PV 4.0™{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ----- Hero Overrides (Dark Tech) ----- */
+    .about-hero {
+        background: #0B0F1A;
+        padding: 4rem 0 3rem;
+        border-bottom: 2px solid rgba(22, 163, 74, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+    .about-hero .energy-line-bg {
+        position: absolute;
+        width: 200%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #16A34A, #F97316, transparent);
+        opacity: 0.1;
+        animation: flowLine 12s linear infinite;
+        z-index: 0;
+        top: 20%;
+    }
+    .about-hero .energy-line-bg:nth-child(2) { top: 60%; animation-duration: 15s; animation-delay: -4s; }
+    @keyframes flowLine {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(50%); }
+    }
+    .about-hero .container { position: relative; z-index: 1; text-align: center; }
+    .about-hero h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #e2e8f0;
+        margin-bottom: 0.5rem;
+    }
+    .about-hero h1 span { color: #16A34A; }
+    .about-hero .subtitle {
+        font-size: 1.3rem;
+        color: #94a3b8;
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+    }
+    .about-hero .hero-text {
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
+    .about-hero .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        justify-content: center;
+    }
+    .about-hero .pill {
+        background: rgba(22, 163, 74, 0.1);
+        border: 1px solid rgba(22, 163, 74, 0.2);
+        padding: 0.4rem 1.2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #e2e8f0;
+    }
+    .about-hero .pill i { color: #F97316; margin-right: 0.4rem; }
+
+    /* General Sections */
+    .section-dark { padding: 4rem 0; background: #0B0F1A; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .section-dark-light { padding: 4rem 0; background: #0B0F1A; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    
+    .grid-2col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+    
+    .value-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+    .value-table td {
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        color: #94a3b8;
+    }
+    .value-table td:first-child { font-weight: 700; color: #16A34A; width: 30%; }
+    
+    .contact-strip {
+        background: linear-gradient(135deg, #0B0F1A, #162a1f);
+        padding: 2.5rem 0;
+        border-top: 1px solid rgba(22, 163, 74, 0.2);
+        text-align: center;
+    }
+    .contact-strip .items { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .contact-strip .items div { color: #94a3b8; }
+    .contact-strip .items i { color: #16A34A; margin-right: 0.5rem; width: 20px; }
+
+    @media (max-width: 992px) {
+        .grid-2col { grid-template-columns: 1fr; }
+        .about-hero h1 { font-size: 2.4rem; }
+        .contact-strip .items { flex-direction: column; gap: 0.8rem; }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<section style="padding: 4rem 0;">
+
+<!-- HERO SECTION -->
+<section class="about-hero">
+    <div class="energy-line-bg"></div>
+    <div class="energy-line-bg"></div>
     <div class="container">
-        <div class="section-title">
-            <h2>About <span>Us</span></h2>
-            <p>Mamoloto Technologies is a South African EPC company dedicated to solar PV and renewable energy solutions.</p>
+        <h1>Engineering the <span>Future</span> of Intelligent Energy</h1>
+        <div class="subtitle">Solar PV 4.0 • Smart Infrastructure • Intelligent Energy Systems</div>
+        <div class="hero-text">
+            Mamoloto Technologies (Pty) Ltd is a South African-based engineering company pioneering the transition toward Solar PV 4.0 — where renewable energy, intelligent infrastructure, and digital systems converge into one integrated ecosystem.
         </div>
+        <div class="pill-group">
+            <span class="pill"><i class="fas fa-bolt"></i> Reliable</span>
+            <span class="pill"><i class="fas fa-brain"></i> Intelligent</span>
+            <span class="pill"><i class="fas fa-leaf"></i> Sustainable</span>
+            <span class="pill"><i class="fas fa-rocket"></i> Future-Ready</span>
+        </div>
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="/services" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Explore Our Solutions</a>
+            <a href="/contact" class="btn btn-secondary"><i class="fas fa-phone"></i> Contact Us</a>
+            <a href="/download-profile" class="btn btn-outline"><i class="fas fa-file-pdf"></i> View Corporate Profile</a>
+        </div>
+    </div>
+</section>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 3rem;">
+<!-- WHO WE ARE -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>Who <span>We Are</span></h2>
+            <p>Integrated Solar PV 4.0 & Intelligent Energy Systems</p>
+        </div>
+        <div class="grid-2col">
             <div>
-                <h3 style="color: #1a3a2b; font-size: 1.8rem; margin-bottom: 1rem;">Building a <span style="color: #f1c40f;">Sustainable</span> South Africa</h3>
-                <p style="font-size: 1.05rem; color: #4a5568; line-height: 1.8;">
-                    Founded in 2018 by Dr. Mamoloto Tlabela, Mamoloto Technologies (PTY) LTD was established to address
-                    critical challenges in South Africa's electricity sector — copper theft, ongoing load-shedding,
-                    and environmental damage from fossil fuels.
+                <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.8;">
+                    Mamoloto Technologies specialises in <strong style="color: #e2e8f0;">Solar PV & Hybrid Systems</strong>,
+                    <strong style="color: #e2e8f0;">Electrical Infrastructure (LV/MV)</strong>,
+                    <strong style="color: #e2e8f0;">Smart Grid Technologies</strong>,
+                    <strong style="color: #e2e8f0;">Digital Twin & Monitoring</strong>, and
+                    <strong style="color: #e2e8f0;">ICT & Automation Infrastructure</strong>.
                 </p>
-                <p style="font-size: 1.05rem; color: #4a5568; line-height: 1.8; margin-top: 1rem;">
-                    With over 34 years of electrical engineering experience, Dr. Tlabela leads the company with a
-                    vision to harness renewable energy for a safer, cleaner future.
+                <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.8; margin-top: 1rem;">
+                    We operate at the intersection of <strong style="color: #F97316;">Energy · Engineering · Intelligence · Innovation</strong>.
+                    Our approach combines traditional engineering excellence with next-generation digital technologies to create systems that not only generate energy — but think, adapt, and optimise performance continuously.
                 </p>
             </div>
-            <div style="background: #1a3a2b; padding: 2.5rem; border-radius: 16px; color: #fff;">
-                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div>
-                        <div style="font-size: 0.8rem; color: #a0c4b0; text-transform: uppercase; letter-spacing: 1px;">Founded</div>
-                        <div style="font-size: 2rem; font-weight: 700; color: #f1c40f;">2018</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 0.8rem; color: #a0c4b0; text-transform: uppercase; letter-spacing: 1px;">Company Type</div>
-                        <div style="font-size: 1.4rem; font-weight: 600;">EPC — Engineering, Procurement & Construction</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 0.8rem; color: #a0c4b0; text-transform: uppercase; letter-spacing: 1px;">Serving</div>
-                        <div style="font-size: 1.2rem;">Residential · Commercial · Industrial</div>
-                    </div>
+            <div style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div><span class="node" style="display: inline-block;"></span> <span style="color: #e2e8f0;">EPC + Intelligence</span></div>
+                    <div><span class="node" style="display: inline-block; background: #F97316;"></span> <span style="color: #e2e8f0;">Digital Twin</span></div>
+                    <div><span class="node" style="display: inline-block; background: #4C1D95;"></span> <span style="color: #e2e8f0;">Smart Grid</span></div>
+                    <div><span class="node" style="display: inline-block; background: #16A34A;"></span> <span style="color: #e2e8f0;">AI Analytics</span></div>
                 </div>
-            </div>
-        </div>
-
-        <div class="section-title" style="margin-top: 3rem;">
-            <h2>Our <span>Founder</span></h2>
-        </div>
-        <div style="background: #fff; border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04);">
-            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start;">
-                <div style="text-align: center;">
-                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #1a3a2b, #2d5a3d); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 3rem; color: #f1c40f;">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h4 style="margin-top: 1rem; color: #1a3a2b;">Dr. Mamoloto Tlabela, Ph.D</h4>
-                    <p style="color: #718096; font-size: 0.9rem;">Founder & Chief Executive Officer</p>
-                </div>
-                <div>
-                    <p style="color: #4a5568; line-height: 1.8;">
-                        Dr. Tlabela holds a PhD in Commerce and Administration and has over 34 years of electrical
-                        engineering experience, working through the ranks from an apprentice electrician to a
-                        Regional Director.
-                    </p>
-                    <p style="color: #4a5568; line-height: 1.8; margin-top: 1rem;">
-                        <em style="color: #1a3a2b;">"As the adage goes, 'every generation borrows the planet from the next',
-                        so we must ensure that the environment is sustainable for the future."</em>
-                    </p>
-                    <p style="color: #4a5568; line-height: 1.8; margin-top: 1rem;">
-                        He founded Mamoloto Technologies in 2018 to manufacture, install, and upgrade solar PV
-                        systems, with plans to diversify into wind, ocean waves, and green hydrogen energy.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-title" style="margin-top: 3rem;">
-            <h2>Our <span>Values</span></h2>
-        </div>
-        <div class="grid-3">
-            <div class="card">
-                <div class="icon"><i class="fas fa-handshake"></i></div>
-                <h3>Integrity</h3>
-                <p>We operate with transparency, honesty, and a commitment to doing what's right for our clients and the environment.</p>
-            </div>
-            <div class="card">
-                <div class="icon"><i class="fas fa-lightbulb"></i></div>
-                <h3>Innovation</h3>
-                <p>We embrace cutting-edge solar technology and continuously explore new renewable energy frontiers.</p>
-            </div>
-            <div class="card">
-                <div class="icon"><i class="fas fa-users"></i></div>
-                <h3>Community</h3>
-                <p>We are dedicated to uplifting South African communities through safe, accessible, and sustainable energy solutions.</p>
+                <div class="energy-line" style="margin: 1.5rem 0;"></div>
+                <p style="color: #64748b; font-size: 0.9rem; text-align: center;">Designed for African realities — grid instability, harsh environments, and economic scalability.</p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- SOLAR PV 4.0 DIFFERENCE -->
+<section class="section-dark-light">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>What is <span>Solar PV 4.0</span>?</h2>
+            <p>The integration of renewable energy, intelligent infrastructure, data analytics, and digital control into a unified energy ecosystem.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="card"><h3><i class="fas fa-solar-panel" style="color: #F97316;"></i> Generation Layer</h3><p>Solar PV arrays, hybrid inverters, battery storage systems</p></div>
+            <div class="card"><h3><i class="fas fa-cogs" style="color: #F97316;"></i> Infrastructure Layer</h3><p>LV/MV networks, substations, protection systems</p></div>
+            <div class="card"><h3><i class="fas fa-brain" style="color: #F97316;"></i> Intelligence Layer</h3><p>Smart metering, monitoring, analytics, diagnostics</p></div>
+            <div class="card"><h3><i class="fas fa-cube" style="color: #F97316;"></i> Digital Twin Layer</h3><p>Simulation, predictive maintenance, optimisation, remote control</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY MAMOLOTO -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>Why <span>Choose Us</span></h2>
+        </div>
+        <div class="grid-2col">
+            <div>
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="color: #16A34A; font-family: 'Montserrat', sans-serif;"><i class="fas fa-puzzle-piece"></i> Integrated Thinking</h4>
+                    <p style="color: #94a3b8;">We combine engineering, energy systems, and digital intelligence into one unified platform.</p>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="color: #16A34A; font-family: 'Montserrat', sans-serif;"><i class="fas fa-sync-alt"></i> EPC + Intelligence Capability</h4>
+                    <p style="color: #94a3b8;">Full lifecycle: Design • Build • Monitor • Optimise.</p>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="color: #16A34A; font-family: 'Montserrat', sans-serif;"><i class="fas fa-map-africa"></i> African-Centred Innovation</h4>
+                    <p style="color: #94a3b8;">Engineered for grid instability, harsh environments, and resilience.</p>
+                </div>
+                <div>
+                    <h4 style="color: #16A34A; font-family: 'Montserrat', sans-serif;"><i class="fas fa-future"></i> Future-Ready Systems</h4>
+                    <p style="color: #94a3b8;">Intelligent infrastructure capable of evolving with future technologies.</p>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span class="node" style="width: 16px; height: 16px;"></span>
+                        <span style="color: #e2e8f0;"><strong style="color: #F97316;">1.5 MW+</strong> Systems Installed</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span class="node" style="width: 16px; height: 16px; background: #F97316;"></span>
+                        <span style="color: #e2e8f0;"><strong style="color: #F97316;">35+</strong> Years Technical Leadership</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span class="node" style="width: 16px; height: 16px; background: #4C1D95;"></span>
+                        <span style="color: #e2e8f0;"><strong style="color: #F97316;">EPC</strong> + Intelligence Integration</span>
+                    </div>
+                </div>
+                <div class="energy-line" style="margin: 1.5rem 0;"></div>
+                <p style="color: #64748b; font-size: 0.9rem;">“We architect intelligent energy ecosystems.”</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CORE SOLUTIONS -->
+<section class="section-dark-light">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>Our <span>Core Solutions</span></h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div class="solution-card"><div class="icon"><i class="fas fa-sun"></i></div><h3>Solar PV 4.0</h3><p>Advanced solar & hybrid systems with smart monitoring.</p></div>
+            <div class="solution-card"><div class="icon"><i class="fas fa-bolt"></i></div><h3>Electrical Infrastructure</h3><p>LV/MV systems, substations, protection & commissioning.</p></div>
+            <div class="solution-card"><div class="icon"><i class="fas fa-brain"></i></div><h3>Smart Grid & Digital</h3><p>Intelligent monitoring, analytics, automation & optimisation.</p></div>
+            <div class="solution-card"><div class="icon"><i class="fas fa-wifi"></i></div><h3>ICT & Connectivity</h3><p>IoT, fibre, remote monitoring & SCADA integration.</p></div>
+            <div class="solution-card"><div class="icon"><i class="fas fa-hard-hat"></i></div><h3>EPC & Consulting</h3><p>End-to-end engineering, procurement & construction.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- VISION, MISSION, VALUES -->
+<section class="section-dark">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
+            <div>
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #16A34A; font-size: 1.8rem; margin-bottom: 0.5rem;">Our Vision</h3>
+                <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.8;">
+                    To lead Africa’s transition into intelligent, sustainable, and data-driven energy ecosystems through Solar PV 4.0 innovation.
+                </p>
+            </div>
+            <div>
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #16A34A; font-size: 1.8rem; margin-bottom: 0.5rem;">Our Mission</h3>
+                <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.8;">
+                    To engineer future-ready energy systems that empower industries, businesses, and communities through innovation, reliability, and intelligent infrastructure.
+                </p>
+            </div>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
+            <h3 style="font-family: 'Montserrat', sans-serif; color: #e2e8f0; text-align: center; margin-bottom: 1rem;">Our Foundation</h3>
+            <table class="value-table">
+                <tr><td>People</td><td>Empowering and protecting people</td></tr>
+                <tr><td>Integrity</td><td>Doing the right thing always</td></tr>
+                <tr><td>Innovation</td><td>Building smarter systems</td></tr>
+                <tr><td>Collaboration</td><td>Achieving more together</td></tr>
+                <tr><td>Excellence</td><td>Delivering lasting impact</td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<section class="contact-strip">
+    <div class="container">
+        <h3 style="font-family: 'Montserrat', sans-serif; color: #e2e8f0; margin-bottom: 1rem;">Let’s Build the Future of Intelligent Energy Together</h3>
+        <div class="items">
+            <div><i class="fas fa-map-marker-alt"></i> Pretoria, South Africa</div>
+            <div><i class="fas fa-phone"></i> +27 (0) 64 556 0041</div>
+            <div><i class="fas fa-envelope"></i> mamoloto@tlabela.com</div>
+            <div><i class="fas fa-globe"></i> www.tlabela.com</div>
+        </div>
+        <div style="margin-top: 1.5rem;">
+            <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Contact Us</a>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
