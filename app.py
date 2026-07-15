@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, send_file
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -98,7 +98,6 @@ def academy():
 
 @app.route('/blog')
 def blog():
-    # Sample blog posts (in production, fetch from DB or markdown files)
     posts = [
         {
             'title': 'The Future of AI in Solar PV 4.0',
@@ -135,10 +134,32 @@ def blog():
     ]
     return render_template('blog.html', posts=posts)
 
+# ---------- SERVE THE COMMISSIONING GUIDE IMAGE ----------
+@app.route('/download-commissioning-guide')
+def download_commissioning_guide():
+    try:
+        return send_from_directory('static/images', 'Commissioning_Guide_Solar_PV_4.0.png', as_attachment=True)
+    except FileNotFoundError:
+        try:
+            return send_from_directory('static/images', 'Commissioning_Guide_Solar_PV_4.0.jpg', as_attachment=True)
+        except FileNotFoundError:
+            return "Commissioning Guide image not found. Please upload the image to static/images/", 404
+
+# ---------- SERVE SMART GRID INTELLIGENCE IMAGE ----------
+@app.route('/download-smart-grid')
+def download_smart_grid():
+    try:
+        return send_from_directory('static/images', 'Smart_Grid_Intelligence.jpg', as_attachment=True)
+    except FileNotFoundError:
+        return "Smart Grid Intelligence image not found. Please upload the image to static/images/", 404
+
 # ---------- STATIC PDF DOWNLOAD ----------
 @app.route('/download-profile')
 def download_profile():
-    return send_from_directory('static', 'Mamoloto_Technologies_Profile.pdf', as_attachment=True)
+    try:
+        return send_from_directory('static', 'Mamoloto_Technologies_Profile.pdf', as_attachment=True)
+    except FileNotFoundError:
+        return "Corporate profile not found. Please upload the PDF to the static folder.", 404
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

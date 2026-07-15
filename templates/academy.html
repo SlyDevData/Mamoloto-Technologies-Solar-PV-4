@@ -1,45 +1,108 @@
 {% extends "base.html" %}
 
-{% block title %}Solar Academy &amp; Training & Capacity Building{% endblock %}
+{% block title %}Solar Academy • Interactive Learning{% endblock %}
 
 {% block extra_css %}
 <style>
-    .academy-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-    }
-
-    .academy-card {
+    .academy-intro {
         background: rgba(255,255,255,0.02);
         border-radius: 16px;
-        padding: 2rem 1.5rem;
+        padding: 2rem;
         border: 1px solid rgba(255,255,255,0.04);
         text-align: center;
-        transition: 0.4s;
+        margin-bottom: 3rem;
     }
-
-        .academy-card:hover {
-            transform: translateY(-6px);
-            border-color: #16A34A;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-
-        .academy-card i {
-            font-size: 3rem;
-            color: #F97316;
-            margin-bottom: 1rem;
-        }
-
-        .academy-card h3 {
-            color: #e2e8f0;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .academy-card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
+    .academy-intro .interest-form {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    .academy-intro .interest-form select, .academy-intro .interest-form button {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-family: 'Inter', sans-serif;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: #e2e8f0;
+    }
+    .academy-intro .interest-form select:focus, .academy-intro .interest-form button:focus {
+        outline: none;
+        border-color: #16A34A;
+    }
+    .academy-intro .interest-form button {
+        background: #16A34A;
+        color: #0B0F1A;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+    }
+    .academy-intro .interest-form button:hover {
+        background: #15803d;
+    }
+    .course-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .course-card {
+        background: rgba(255,255,255,0.02);
+        border-radius: 16px;
+        padding: 1.8rem;
+        border: 1px solid rgba(255,255,255,0.04);
+        transition: 0.4s;
+        display: flex;
+        flex-direction: column;
+    }
+    .course-card:hover {
+        transform: translateY(-6px);
+        border-color: #16A34A;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .course-card .icon { font-size: 2.8rem; color: #F97316; margin-bottom: 0.5rem; }
+    .course-card h3 { color: #e2e8f0; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; }
+    .course-card p { color: #94a3b8; font-size: 0.9rem; flex: 1; }
+    .course-card .progress {
+        margin: 1rem 0 0.5rem;
+        width: 100%;
+        height: 4px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .course-card .progress .bar {
+        height: 100%;
+        background: #16A34A;
+        width: 0%;
+        border-radius: 4px;
+        transition: width 0.5s;
+    }
+    .course-card .btn { align-self: flex-start; margin-top: 1rem; font-size: 0.85rem; padding: 0.5rem 1.5rem; }
+    .course-card .quiz {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: rgba(255,255,255,0.02);
+        border-radius: 8px;
+        border-left: 3px solid #F97316;
+        width: 100%;
+    }
+    .course-card .quiz label { display: block; margin: 0.3rem 0; color: #94a3b8; }
+    .course-card .quiz input[type="radio"] { margin-right: 0.5rem; accent-color: #16A34A; }
+    .course-card .quiz .answer-result { margin-top: 0.5rem; font-weight: 600; }
+    .course-card .completed { color: #16A34A; font-size: 0.9rem; font-weight: 600; }
+    .recommendation-badge {
+        display: inline-block;
+        background: rgba(249, 115, 22, 0.15);
+        color: #F97316;
+        padding: 0.2rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        margin-top: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
 </style>
 {% endblock %}
 
@@ -48,35 +111,228 @@
     <div class="container">
         <div class="section-title animate-on-scroll">
             <h2>Solar Academy <span>South Africa</span></h2>
-            <p>Building capacity through knowledge and skills development</p>
+            <p>Interactive courses, quizzes, and AI‑powered learning paths</p>
         </div>
 
-        <div class="academy-grid">
-            <div class="academy-card animate-on-scroll">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <h3>PV Design & Installation</h3>
-                <p>Practical training for engineers and technicians on Solar PV 4.0 systems.</p>
+        <!-- AI Interest Form -->
+        <div class="academy-intro animate-on-scroll">
+            <h3 style="color: #e2e8f0; font-family: 'Montserrat', sans-serif;">🚀 Tell us your interest, and we’ll recommend the right course</h3>
+            <form class="interest-form" onsubmit="recommendCourses(event)">
+                <select id="interestSelect">
+                    <option value="all">All Topics</option>
+                    <option value="ai">AI & Energy Management</option>
+                    <option value="grid">Smart Grid & SCADA</option>
+                    <option value="pv">Solar PV Design</option>
+                    <option value="digital">Digital Twins</option>
+                    <option value="microgrid">Microgrids</option>
+                </select>
+                <button type="submit"><i class="fas fa-magic"></i> Get Recommendations</button>
+            </form>
+            <div id="recommendationMessage" style="margin-top: 0.8rem; color: #16A34A; font-weight: 500;"></div>
+        </div>
+
+        <!-- Course Catalogue -->
+        <div class="course-grid" id="courseGrid">
+            <!-- Course 1: AI & Energy Management -->
+            <div class="course-card animate-on-scroll" data-category="ai">
+                <div class="icon"><i class="fas fa-robot"></i></div>
+                <h3>AI & Energy Management</h3>
+                <p>Learn how artificial intelligence optimises grid operations, reduces costs, and enables predictive maintenance.</p>
+                <span class="recommendation-badge">AI</span>
+                <div class="progress"><div class="bar" id="progress-ai"></div></div>
+                <div id="completed-ai" class="completed" style="display:none;">✅ Completed</div>
+                <button class="btn btn-primary" onclick="startQuiz('ai')">Take Quiz</button>
+                <div class="quiz" id="quiz-ai" style="display:none;">
+                    <p><strong>Quiz: AI in Energy</strong></p>
+                    <label><input type="radio" name="q1-ai" value="a"> A. Predictive maintenance</label>
+                    <label><input type="radio" name="q1-ai" value="b"> B. Solar panel cleaning</label>
+                    <label><input type="radio" name="q1-ai" value="c"> C. Battery disposal</label>
+                    <button class="btn btn-primary" style="font-size:0.8rem; padding:0.3rem 1rem; margin-top:0.3rem;" onclick="checkQuiz('ai', 'a')">Submit Answer</button>
+                    <div id="result-ai" class="answer-result"></div>
+                </div>
             </div>
-            <div class="academy-card animate-on-scroll">
-                <i class="fas fa-microchip"></i>
-                <h3>Smart Grid & Monitoring</h3>
-                <p>Courses on AMI, SCADA, and advanced energy analytics.</p>
+
+            <!-- Course 2: Smart Grid & SCADA -->
+            <div class="course-card animate-on-scroll" data-category="grid">
+                <div class="icon"><i class="fas fa-microchip"></i></div>
+                <h3>Smart Grid & SCADA</h3>
+                <p>Understand AMI, SCADA systems, and IoT integration for modern utility networks.</p>
+                <span class="recommendation-badge">Grid</span>
+                <div class="progress"><div class="bar" id="progress-grid"></div></div>
+                <div id="completed-grid" class="completed" style="display:none;">✅ Completed</div>
+                <button class="btn btn-primary" onclick="startQuiz('grid')">Take Quiz</button>
+                <div class="quiz" id="quiz-grid" style="display:none;">
+                    <p><strong>Quiz: Smart Grid</strong></p>
+                    <label><input type="radio" name="q1-grid" value="a"> A. Advanced Metering Infrastructure</label>
+                    <label><input type="radio" name="q1-grid" value="b"> B. Battery storage</label>
+                    <label><input type="radio" name="q1-grid" value="c"> C. Solar panels</label>
+                    <button class="btn btn-primary" style="font-size:0.8rem; padding:0.3rem 1rem; margin-top:0.3rem;" onclick="checkQuiz('grid', 'a')">Submit Answer</button>
+                    <div id="result-grid" class="answer-result"></div>
+                </div>
             </div>
-            <div class="academy-card animate-on-scroll">
-                <i class="fas fa-cube"></i>
-                <h3>Digital Twin & AI</h3>
-                <p>Workshops on simulation, optimisation, and predictive maintenance.</p>
+
+            <!-- Course 3: Solar PV 4.0 Design -->
+            <div class="course-card animate-on-scroll" data-category="pv">
+                <div class="icon"><i class="fas fa-sun"></i></div>
+                <h3>Solar PV 4.0 Design</h3>
+                <p>Master the design of intelligent solar PV systems with hybrid inverters and BESS.</p>
+                <span class="recommendation-badge">Solar PV</span>
+                <div class="progress"><div class="bar" id="progress-pv"></div></div>
+                <div id="completed-pv" class="completed" style="display:none;">✅ Completed</div>
+                <button class="btn btn-primary" onclick="startQuiz('pv')">Take Quiz</button>
+                <div class="quiz" id="quiz-pv" style="display:none;">
+                    <p><strong>Quiz: Solar PV 4.0</strong></p>
+                    <label><input type="radio" name="q1-pv" value="a"> A. Hybrid inverter</label>
+                    <label><input type="radio" name="q1-pv" value="b"> B. Diesel generator</label>
+                    <label><input type="radio" name="q1-pv" value="c"> C. Wind turbine</label>
+                    <button class="btn btn-primary" style="font-size:0.8rem; padding:0.3rem 1rem; margin-top:0.3rem;" onclick="checkQuiz('pv', 'a')">Submit Answer</button>
+                    <div id="result-pv" class="answer-result"></div>
+                </div>
             </div>
-            <div class="academy-card animate-on-scroll">
-                <i class="fas fa-tools"></i>
-                <h3>Commissioning & Maintenance</h3>
-                <p>Hands-on training for safe and efficient system handover.</p>
+
+            <!-- Course 4: Digital Twins -->
+            <div class="course-card animate-on-scroll" data-category="digital">
+                <div class="icon"><i class="fas fa-cube"></i></div>
+                <h3>Digital Twins</h3>
+                <p>Explore simulation, predictive maintenance, and optimisation using digital twin technology.</p>
+                <span class="recommendation-badge">Digital Twin</span>
+                <div class="progress"><div class="bar" id="progress-digital"></div></div>
+                <div id="completed-digital" class="completed" style="display:none;">✅ Completed</div>
+                <button class="btn btn-primary" onclick="startQuiz('digital')">Take Quiz</button>
+                <div class="quiz" id="quiz-digital" style="display:none;">
+                    <p><strong>Quiz: Digital Twins</strong></p>
+                    <label><input type="radio" name="q1-digital" value="a"> A. Virtual system modelling</label>
+                    <label><input type="radio" name="q1-digital" value="b"> B. Physical panel cleaning</label>
+                    <label><input type="radio" name="q1-digital" value="c"> C. Manual system inspection</label>
+                    <button class="btn btn-primary" style="font-size:0.8rem; padding:0.3rem 1rem; margin-top:0.3rem;" onclick="checkQuiz('digital', 'a')">Submit Answer</button>
+                    <div id="result-digital" class="answer-result"></div>
+                </div>
+            </div>
+
+            <!-- Course 5: Microgrids -->
+            <div class="course-card animate-on-scroll" data-category="microgrid">
+                <div class="icon"><i class="fas fa-microgrid"></i></div>
+                <h3>Microgrids</h3>
+                <p>Learn about hybrid microgrids, energy resilience, and integration with renewables.</p>
+                <span class="recommendation-badge">Microgrid</span>
+                <div class="progress"><div class="bar" id="progress-microgrid"></div></div>
+                <div id="completed-microgrid" class="completed" style="display:none;">✅ Completed</div>
+                <button class="btn btn-primary" onclick="startQuiz('microgrid')">Take Quiz</button>
+                <div class="quiz" id="quiz-microgrid" style="display:none;">
+                    <p><strong>Quiz: Microgrids</strong></p>
+                    <label><input type="radio" name="q1-microgrid" value="a"> A. Hybrid energy systems</label>
+                    <label><input type="radio" name="q1-microgrid" value="b"> B. Single solar panel</label>
+                    <label><input type="radio" name="q1-microgrid" value="c"> C. Diesel only</label>
+                    <button class="btn btn-primary" style="font-size:0.8rem; padding:0.3rem 1rem; margin-top:0.3rem;" onclick="checkQuiz('microgrid', 'a')">Submit Answer</button>
+                    <div id="result-microgrid" class="answer-result"></div>
+                </div>
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="/contact" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Enquire Now</a>
+        <!-- Dashboard -->
+        <div style="margin-top: 3rem; background: rgba(255,255,255,0.02); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.04); text-align: center;">
+            <h3 style="color: #e2e8f0; font-family: 'Montserrat', sans-serif;"><i class="fas fa-chart-simple" style="color: #F97316;"></i> Your Learning Dashboard</h3>
+            <p style="color: #94a3b8;">Courses completed: <span id="completedCount">0</span> / 5</p>
+            <button class="btn btn-outline" onclick="resetProgress()" style="font-size:0.85rem; padding:0.5rem 1.5rem;">Reset Progress</button>
         </div>
     </div>
 </section>
+
+<script>
+    // ----- AI RECOMMENDATION ENGINE -----
+    function recommendCourses(event) {
+        event.preventDefault();
+        const interest = document.getElementById('interestSelect').value;
+        const courses = document.querySelectorAll('.course-card');
+        let matched = 0;
+        courses.forEach(card => {
+            const category = card.dataset.category;
+            if (interest === 'all' || category === interest) {
+                card.style.display = 'flex';
+                matched++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        const msg = document.getElementById('recommendationMessage');
+        if (matched === 0) {
+            msg.textContent = 'No courses found for this topic. Try another.';
+        } else {
+            msg.textContent = `Showing ${matched} courses matching your interest.`;
+        }
+    }
+
+    // ----- QUIZ & PROGRESS -----
+    function startQuiz(courseId) {
+        const quiz = document.getElementById(`quiz-${courseId}`);
+        if (quiz.style.display === 'none') {
+            quiz.style.display = 'block';
+        } else {
+            quiz.style.display = 'none';
+        }
+    }
+
+    function checkQuiz(courseId, correctAnswer) {
+        const selected = document.querySelector(`input[name="q1-${courseId}"]:checked`);
+        const resultDiv = document.getElementById(`result-${courseId}`);
+        if (!selected) {
+            resultDiv.textContent = 'Please select an answer.';
+            resultDiv.style.color = '#F97316';
+            return;
+        }
+        if (selected.value === correctAnswer) {
+            resultDiv.textContent = '✅ Correct! Well done.';
+            resultDiv.style.color = '#16A34A';
+            // Mark as completed
+            localStorage.setItem(`completed-${courseId}`, 'true');
+            updateProgress(courseId);
+        } else {
+            resultDiv.textContent = '❌ Not quite. Try again.';
+            resultDiv.style.color = '#F97316';
+        }
+    }
+
+    function updateProgress(courseId) {
+        const progressBar = document.getElementById(`progress-${courseId}`);
+        const completedDiv = document.getElementById(`completed-${courseId}`);
+        if (localStorage.getItem(`completed-${courseId}`) === 'true') {
+            progressBar.style.width = '100%';
+            completedDiv.style.display = 'block';
+        } else {
+            progressBar.style.width = '0%';
+            completedDiv.style.display = 'none';
+        }
+        updateCompletedCount();
+    }
+
+    function updateCompletedCount() {
+        const total = document.querySelectorAll('.course-card').length;
+        let completed = 0;
+        document.querySelectorAll('.course-card').forEach(card => {
+            const id = card.dataset.category;
+            if (localStorage.getItem(`completed-${id}`) === 'true') completed++;
+        });
+        document.getElementById('completedCount').textContent = completed;
+    }
+
+    function resetProgress() {
+        if (confirm('Reset all progress?')) {
+            document.querySelectorAll('.course-card').forEach(card => {
+                const id = card.dataset.category;
+                localStorage.removeItem(`completed-${id}`);
+                updateProgress(id);
+            });
+            updateCompletedCount();
+        }
+    }
+
+    // Init on load
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.course-card').forEach(card => {
+            const id = card.dataset.category;
+            updateProgress(id);
+        });
+        updateCompletedCount();
+    });
+</script>
 {% endblock %}

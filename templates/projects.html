@@ -1,75 +1,197 @@
 {% extends "base.html" %}
 
-{% block title %}Projects • Solar PV 4.0 Engineering Case Studies{% endblock %}
+{% block title %}Projects • Our Journey & Milestones{% endblock %}
 
 {% block extra_css %}
-<!-- External resources -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
-    /* ===== Scroll animations ===== */
-    .animate-on-scroll {
+    /* ----- TIMELINE STYLES ----- */
+    .timeline-section {
+        padding: 2rem 0 4rem;
+    }
+    .timeline-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    .timeline-header h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.4rem;
+        color: #e2e8f0;
+    }
+    .timeline-header h2 span { color: #16A34A; }
+    .timeline-header p {
+        color: #94a3b8;
+        max-width: 650px;
+        margin: 0.5rem auto 0;
+        font-size: 1.05rem;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #16A34A, #F97316, #4C1D95);
+        transform: translateX(-50%);
+        border-radius: 3px;
+    }
+
+    .timeline-item {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 2rem 3rem 2rem;
+        position: relative;
+        width: 50%;
+        animation: fadeInUp 0.8s ease forwards;
         opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .animate-on-scroll.visible {
-        opacity: 1;
-        transform: translateY(0);
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+    .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+    .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+    .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+    .timeline-item:nth-child(8) { animation-delay: 0.8s; }
+    .timeline-item:nth-child(9) { animation-delay: 0.9s; }
+    .timeline-item:nth-child(10) { animation-delay: 1.0s; }
+
+    .timeline-item:nth-child(odd) {
+        padding-right: 3rem;
+        text-align: right;
+        align-self: flex-start;
+    }
+    .timeline-item:nth-child(even) {
+        padding-left: 3rem;
+        text-align: left;
+        margin-left: 50%;
+        align-self: flex-start;
     }
 
-    /* ===== Project card link wrapper ===== */
-    .project-card-link {
-        text-decoration: none;
-        display: block;
-        cursor: pointer;
-        transition: 0.4s;
+    .timeline-item .dot {
+        position: absolute;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #16A34A;
+        border: 3px solid #0B0F1A;
+        box-shadow: 0 0 20px rgba(22, 163, 74, 0.4);
+        z-index: 2;
+        transition: all 0.3s;
     }
-    .project-card-link:hover .project-card {
-        transform: translateY(-4px);
+    .timeline-item:nth-child(odd) .dot {
+        right: -10px;
+    }
+    .timeline-item:nth-child(even) .dot {
+        left: -10px;
+    }
+    .timeline-item:hover .dot {
+        transform: scale(1.3);
+        box-shadow: 0 0 35px rgba(22, 163, 74, 0.7);
+    }
+
+    .timeline-content {
+        background: rgba(255,255,255,0.02);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 16px;
+        padding: 1.5rem 2rem;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        max-width: 400px;
+        position: relative;
+    }
+    .timeline-content:hover {
+        transform: translateY(-6px);
         border-color: rgba(22, 163, 74, 0.3);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+    }
+    .timeline-content .year {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #16A34A;
+        line-height: 1.2;
+    }
+    .timeline-content .title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #e2e8f0;
+        margin: 0.3rem 0;
+    }
+    .timeline-content .description {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0.3rem 0 0;
+    }
+    .timeline-content .badge-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+    }
+    .timeline-content .badge-timeline {
+        display: inline-block;
+        background: rgba(22, 163, 74, 0.12);
+        color: #16A34A;
+        padding: 0.15rem 0.7rem;
+        border-radius: 20px;
+        font-size: 0.65rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .timeline-content .badge-timeline.orange {
+        background: rgba(249, 115, 22, 0.12);
+        color: #F97316;
+    }
+    .timeline-content .badge-timeline.purple {
+        background: rgba(76, 29, 149, 0.15);
+        color: #a78bfa;
+    }
+    .timeline-content .badge-timeline.gold {
+        background: rgba(241, 196, 15, 0.12);
+        color: #f1c40f;
+    }
+    .timeline-content .award-icon {
+        color: #f1c40f;
+        margin-right: 0.3rem;
     }
 
-    /* ===== Card itself ===== */
+    /* ----- PROJECT CARDS ----- */
     .project-card {
         background: rgba(255,255,255,0.02);
         border-radius: 16px;
         padding: 2rem;
         border: 1px solid rgba(255,255,255,0.04);
+        transition: 0.4s;
+        margin-bottom: 2rem;
         display: grid;
         grid-template-columns: 1fr 2fr;
         gap: 2rem;
         align-items: start;
-        transition: 0.4s;
-        margin-bottom: 2rem;
     }
-
-    /* ===== Meta & typography ===== */
-    .project-card .meta {
-        color: #cbd5e1;   /* improved contrast */
-        font-size: 0.9rem;
+    .project-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(22, 163, 74, 0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
-    .project-card .meta strong {
-        color: #f1f5f9;
-        display: block;
-        font-size: 1.3rem;
-        font-family: 'Montserrat', sans-serif;
-        margin: 0.2rem 0 0.1rem;
-    }
-    .project-card .meta .location {
-        color: #94a3b8;
-        font-size: 0.85rem;
-    }
-
-    /* ===== Badges ===== */
-    .badge {
+    .project-card .meta { color: #94a3b8; font-size: 0.9rem; }
+    .project-card .meta strong { color: #e2e8f0; display: block; font-size: 1.3rem; font-family: 'Montserrat', sans-serif; }
+    .project-card .badge {
         display: inline-block;
         background: rgba(22, 163, 74, 0.15);
-        color: #4ade80;
+        color: #16A34A;
         padding: 0.2rem 0.8rem;
         border-radius: 20px;
         font-size: 0.75rem;
@@ -77,18 +199,9 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
-
-    /* ===== Description ===== */
-    .project-card .description {
-        color: #94a3b8;
-        margin: 0.5rem 0 0.8rem;
-        line-height: 1.6;
-    }
-
-    /* ===== Icon / visual placeholder ===== */
-    .project-icon {
+    .project-card .icon-placeholder {
         font-size: 3rem;
-        color: #f97316;
+        color: #F97316;
         text-align: center;
         padding: 1rem;
         background: rgba(255,255,255,0.02);
@@ -100,51 +213,36 @@
         justify-content: center;
         min-height: 150px;
     }
-    .project-icon .kw {
+    .project-card .icon-placeholder .kw {
         font-size: 0.9rem;
-        color: #4ade80;
+        color: #16A34A;
         font-weight: 700;
         margin-top: 0.3rem;
     }
-    .project-icon .type {
-        font-size: 0.7rem;
-        color: #94a3b8;
-        margin-top: 0.15rem;
-    }
+    .project-card ul { list-style: none; padding: 0; margin-top: 0.5rem; }
+    .project-card ul li { padding: 0.2rem 0; color: #94a3b8; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+    .project-card ul li i { color: #16A34A; width: 18px; }
 
-    /* ===== Bullet list ===== */
-    .project-card ul {
-        list-style: none;
-        padding: 0;
-        margin: 0.5rem 0 0;
-    }
-    .project-card ul li {
-        padding: 0.2rem 0;
-        color: #94a3b8;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .project-card ul li i {
-        color: #4ade80;
-        width: 18px;
-        flex-shrink: 0;
-    }
-    .project-card ul li strong {
-        color: #e2e8f0;
-        font-weight: 600;
-    }
-
-    /* ===== Responsive ===== */
     @media (max-width: 768px) {
-        .project-card {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+        .timeline::before { left: 20px; }
+        .timeline-item {
+            width: 100%;
+            padding-left: 3.5rem !important;
+            padding-right: 0 !important;
+            text-align: left !important;
+            margin-left: 0 !important;
         }
-        .project-icon {
-            min-height: 100px;
+        .timeline-item:nth-child(odd) { padding-right: 0 !important; }
+        .timeline-item:nth-child(even) { padding-left: 3.5rem !important; margin-left: 0 !important; }
+        .timeline-item .dot {
+            left: -8px !important;
+            right: auto !important;
+            width: 16px;
+            height: 16px;
         }
+        .timeline-content { max-width: 100%; }
+        .project-card { grid-template-columns: 1fr; }
+        .project-card .icon-placeholder { min-height: 100px; }
     }
 </style>
 {% endblock %}
@@ -152,150 +250,308 @@
 {% block content %}
 <section style="padding: 4rem 0;">
     <div class="container">
-        <div class="section-title animate-on-scroll">
-            <h2>Our <span>Projects</span></h2>
+
+        <!-- ===== TIMELINE SECTION ===== -->
+        <div class="timeline-header animate-on-scroll">
+            <h2>Our <span>Journey</span></h2>
+            <p>From a bold vision in 2018 to Africa's leading intelligent energy platform</p>
+        </div>
+
+        <div class="timeline">
+
+            <!-- 2018 - Founding -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2018</div>
+                    <div class="title">Mamoloto Technologies Founded</div>
+                    <div class="description">
+                        Founded on 8 March 2018 by Dr. Mamoloto Tlabela, Ph.D., as an Engineering, Procurement and Construction (EPC) company specialising in Solar PV systems.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline">EPC</span>
+                        <span class="badge-timeline orange">Solar PV</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2019 - First Projects -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2019</div>
+                    <div class="title">First Solar PV Installations</div>
+                    <div class="description">
+                        Delivered first residential and commercial solar PV systems, establishing full EPC capability for hybrid and grid-tied solutions.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline">Residential</span>
+                        <span class="badge-timeline orange">Commercial</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2020 - Expansion -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2020</div>
+                    <div class="title">Strategic Expansion</div>
+                    <div class="description">
+                        Expanded service offering to include LV/MV electrical infrastructure, substations, and network protection systems. Grew field teams to deliver larger commercial and industrial projects.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline">LV/MV</span>
+                        <span class="badge-timeline purple">Industrial</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2021 - Intelligence Layer -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2021</div>
+                    <div class="title">Intelligence Layer Development</div>
+                    <div class="description">
+                        Pioneered the integration of smart monitoring, analytics, and real-time diagnostics into Solar PV systems — laying the foundation for the Solar PV 4.0 framework.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline gold">Innovation</span>
+                        <span class="badge-timeline">Smart Monitoring</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2022 - Greening The Future Recognition -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2022</div>
+                    <div class="title">Mail & Guardian Recognition</div>
+                    <div class="description">
+                        Featured in Mail & Guardian's "Greening The Future" — recognised for contributions to renewable energy and sustainable development in South Africa.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline gold"><i class="fas fa-award award-icon"></i> Award</span>
+                        <span class="badge-timeline">Sustainability</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2023 - Digital Twin & AI -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2023</div>
+                    <div class="title">Digital Twin & AI Integration</div>
+                    <div class="description">
+                        Launched Digital Twin capabilities for predictive maintenance and system optimisation. Began integrating AI-driven energy management into the Solar PV 4.0 framework.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline purple">Digital Twin</span>
+                        <span class="badge-timeline orange">AI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 - Research Leadership -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2024</div>
+                    <div class="title">Research & Thought Leadership</div>
+                    <div class="description">
+                        Published research on climate-based PV panel degradation, AI in solar energy, and smart grid technologies. Dr. Tlabela contributed to pv magazine and international energy forums.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline gold">Research</span>
+                        <span class="badge-timeline">pv magazine</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2025 - Diversification -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2025</div>
+                    <div class="title">Diversification Strategy</div>
+                    <div class="description">
+                        Began diversification into wind energy, ocean wave, and green hydrogen — building a comprehensive renewable energy ecosystem for Africa.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline orange">Wind</span>
+                        <span class="badge-timeline purple">Hydrogen</span>
+                        <span class="badge-timeline">Wave Energy</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2026 - Solar PV 4.0 AI Launch -->
+            <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2026</div>
+                    <div class="title">Solar PV 4.0 AI Platform</div>
+                    <div class="description">
+                        Launched the Solar PV 4.0 AI platform — integrating AI-powered energy management, predictive analytics, smart battery management, and remote monitoring for intelligent, autonomous energy systems.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline gold">Launch</span>
+                        <span class="badge-timeline">AI</span>
+                        <span class="badge-timeline purple">Next-Gen</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Vision -->
+            <div class="timeline-item">
+                <div class="dot" style="background: #F97316; box-shadow: 0 0 20px rgba(249, 115, 22, 0.6);"></div>
+                <div class="timeline-content" style="border-color: rgba(249, 115, 22, 0.3);">
+                    <div class="year" style="color: #F97316;">Future</div>
+                    <div class="title">Africa's Intelligent Energy Future</div>
+                    <div class="description">
+                        <strong>Vision:</strong> Lead Africa's transition into intelligent, data-driven energy systems through Solar PV 4.0 innovation.<br><br>
+                        <strong>Mission:</strong> Engineer future-ready energy systems that empower industries, businesses, and communities through innovation, reliability, and intelligent infrastructure.
+                    </div>
+                    <div class="badge-group">
+                        <span class="badge-timeline gold">Vision</span>
+                        <span class="badge-timeline">Sustainability</span>
+                        <span class="badge-timeline orange">Innovation</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="energy-line" style="max-width: 200px; margin: 1rem auto;"></div>
+
+        <!-- ===== PROJECT CASE STUDIES ===== -->
+        <div class="section-title animate-on-scroll" style="margin-top: 3rem;">
+            <h2>Featured <span>Projects</span></h2>
             <p>Real-world engineering solutions demonstrating Solar PV 4.0 capability</p>
         </div>
 
-        <!-- ===== Project 1 ===== -->
-        <a href="/projects/1" class="project-card-link" role="button">
-            <div class="project-card animate-on-scroll">
-                <div class="project-icon">
-                    <i class="fas fa-gas-pump" aria-hidden="true"></i>
-                    <span class="kw">80 kW</span>
-                    <span class="type">Commercial</span>
-                </div>
-                <div>
-                    <div class="meta">
-                        <span class="badge">Solar PV 4.0</span>
-                        <span class="badge">Hybrid</span>
-                        <strong>Makhado Filling Station</strong>
-                        <span class="location">Makhado, Limpopo</span>
-                    </div>
-                    <p class="description">
-                        Design and installation of an 80kW solar PV system with hybrid inverter and battery storage,
-                        ensuring 24/7 fuel station operations despite grid instability.
-                    </p>
-                    <ul>
-                        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> <strong>Challenge:</strong> Frequent load-shedding disrupting business</li>
-                        <li><i class="fas fa-lightbulb" aria-hidden="true"></i> <strong>Solution:</strong> Hybrid system with smart monitoring &amp; AI load profiling</li>
-                        <li><i class="fas fa-chart-line" aria-hidden="true"></i> <strong>Outcome:</strong> 40% reduction in operating costs, 100% uptime during load-shedding</li>
-                    </ul>
-                </div>
+        <!-- Project 1: Makhado Filling Station -->
+        <div class="project-card animate-on-scroll">
+            <div class="icon-placeholder">
+                <i class="fas fa-gas-pump"></i>
+                <span class="kw">80 kW</span>
+                <span style="font-size: 0.7rem; color: #64748b;">Commercial</span>
             </div>
-        </a>
-
-        <!-- ===== Project 2 ===== -->
-        <a href="/projects/2" class="project-card-link" role="button">
-            <div class="project-card animate-on-scroll">
-                <div class="project-icon">
-                    <i class="fas fa-home" aria-hidden="true"></i>
-                    <span class="kw">150 kW</span>
-                    <span class="type">Residential Estate</span>
+            <div>
+                <div class="meta">
+                    <span class="badge">Solar PV 4.0</span>
+                    <span class="badge">Hybrid</span>
+                    <strong>Makhado Filling Station</strong>
+                    <span>Makhado, Limpopo</span>
                 </div>
-                <div>
-                    <div class="meta">
-                        <span class="badge">Digital Twin</span>
-                        <span class="badge">AI Optimisation</span>
-                        <strong>Midstream Residential Estate</strong>
-                        <span class="location">Midstream, Gauteng</span>
-                    </div>
-                    <p class="description">
-                        Integrated Solar PV 4.0 system with digital twin modelling for 25 luxury homes,
-                        enabling real-time energy optimisation and predictive maintenance.
-                    </p>
-                    <ul>
-                        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> <strong>Challenge:</strong> High energy consumption and grid dependency</li>
-                        <li><i class="fas fa-lightbulb" aria-hidden="true"></i> <strong>Solution:</strong> AI-powered energy management system with digital twin</li>
-                        <li><i class="fas fa-chart-line" aria-hidden="true"></i> <strong>Outcome:</strong> 60% reduction in grid energy usage, 30% cost savings</li>
-                    </ul>
-                </div>
+                <p style="color: #94a3b8; margin: 0.5rem 0;">
+                    Design and installation of an 80kW solar PV system with hybrid inverter and battery storage, 
+                    ensuring 24/7 fuel station operations despite grid instability.
+                </p>
+                <ul>
+                    <li><i class="fas fa-exclamation-triangle"></i> <strong style="color: #e2e8f0;">Challenge:</strong> Frequent load-shedding disrupting business</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong style="color: #e2e8f0;">Solution:</strong> Hybrid system with smart monitoring and AI load profiling</li>
+                    <li><i class="fas fa-chart-line"></i> <strong style="color: #e2e8f0;">Outcome:</strong> 40% reduction in operating costs, 100% uptime during load-shedding</li>
+                </ul>
             </div>
-        </a>
-
-        <!-- ===== Project 3 ===== -->
-        <a href="/projects/3" class="project-card-link" role="button">
-            <div class="project-card animate-on-scroll">
-                <div class="project-icon">
-                    <i class="fas fa-school" aria-hidden="true"></i>
-                    <span class="kw">50 kW</span>
-                    <span class="type">Public Infrastructure</span>
-                </div>
-                <div>
-                    <div class="meta">
-                        <span class="badge">EPC</span>
-                        <span class="badge">Off-Grid</span>
-                        <strong>Motse Maria High School</strong>
-                        <span class="location">North West Province</span>
-                    </div>
-                    <p class="description">
-                        Full EPC delivery of a 50kW solar PV system with battery backup, providing uninterrupted
-                        power for critical school operations and computer labs.
-                    </p>
-                    <ul>
-                        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> <strong>Challenge:</strong> Unreliable grid affecting learning</li>
-                        <li><i class="fas fa-lightbulb" aria-hidden="true"></i> <strong>Solution:</strong> Off-grid hybrid system with smart monitoring</li>
-                        <li><i class="fas fa-chart-line" aria-hidden="true"></i> <strong>Outcome:</strong> 100% power availability during school hours</li>
-                    </ul>
-                </div>
-            </div>
-        </a>
-
-        <!-- ===== Project 4 ===== -->
-        <a href="/projects/4" class="project-card-link" role="button">
-            <div class="project-card animate-on-scroll">
-                <div class="project-icon">
-                    <i class="fas fa-car" aria-hidden="true"></i>
-                    <span class="kw">120 kW</span>
-                    <span class="type">Future Mobility</span>
-                </div>
-                <div>
-                    <div class="meta">
-                        <span class="badge">EV Charging</span>
-                        <span class="badge">Smart Grid</span>
-                        <strong>EV Charging Infrastructure</strong>
-                        <span class="location">Pretoria, Johannesburg</span>
-                    </div>
-                    <p class="description">
-                        Design and installation of solar-powered EV charging stations with smart grid integration
-                        and load management for commercial fleets.
-                    </p>
-                    <ul>
-                        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> <strong>Challenge:</strong> High demand and peak load management</li>
-                        <li><i class="fas fa-lightbulb" aria-hidden="true"></i> <strong>Solution:</strong> AI-driven load balancing &amp; V2G readiness</li>
-                        <li><i class="fas fa-chart-line" aria-hidden="true"></i> <strong>Outcome:</strong> 30% reduction in charging costs, 99% uptime</li>
-                    </ul>
-                </div>
-            </div>
-        </a>
-
-        <!-- ===== Call to action ===== -->
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="{{ url_for('contact') }}" class="btn btn-primary">
-                <i class="fas fa-paper-plane" aria-hidden="true"></i> Discuss Your Project
-            </a>
         </div>
+
+        <!-- Project 2: Midstream Residential Estate -->
+        <div class="project-card animate-on-scroll">
+            <div class="icon-placeholder">
+                <i class="fas fa-home"></i>
+                <span class="kw">150 kW</span>
+                <span style="font-size: 0.7rem; color: #64748b;">Residential Estate</span>
+            </div>
+            <div>
+                <div class="meta">
+                    <span class="badge">Digital Twin</span>
+                    <span class="badge">AI Optimisation</span>
+                    <strong>Midstream Residential Estate</strong>
+                    <span>Midstream, Gauteng</span>
+                </div>
+                <p style="color: #94a3b8; margin: 0.5rem 0;">
+                    Integrated Solar PV 4.0 system with digital twin modelling for 25 luxury homes, 
+                    enabling real-time energy optimisation and predictive maintenance.
+                </p>
+                <ul>
+                    <li><i class="fas fa-exclamation-triangle"></i> <strong style="color: #e2e8f0;">Challenge:</strong> High energy consumption and grid dependency</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong style="color: #e2e8f0;">Solution:</strong> AI-powered energy management with digital twin</li>
+                    <li><i class="fas fa-chart-line"></i> <strong style="color: #e2e8f0;">Outcome:</strong> 60% reduction in grid energy usage, 30% cost savings</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Project 3: Motse Maria High School -->
+        <div class="project-card animate-on-scroll">
+            <div class="icon-placeholder">
+                <i class="fas fa-school"></i>
+                <span class="kw">50 kW</span>
+                <span style="font-size: 0.7rem; color: #64748b;">Public Infrastructure</span>
+            </div>
+            <div>
+                <div class="meta">
+                    <span class="badge">EPC</span>
+                    <span class="badge">Off-Grid</span>
+                    <strong>Motse Maria High School</strong>
+                    <span>North West Province</span>
+                </div>
+                <p style="color: #94a3b8; margin: 0.5rem 0;">
+                    Full EPC delivery of a 50kW solar PV system with battery backup, providing uninterrupted 
+                    power for critical school operations and computer labs.
+                </p>
+                <ul>
+                    <li><i class="fas fa-exclamation-triangle"></i> <strong style="color: #e2e8f0;">Challenge:</strong> Unreliable grid affecting learning</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong style="color: #e2e8f0;">Solution:</strong> Off-grid hybrid system with smart monitoring</li>
+                    <li><i class="fas fa-chart-line"></i> <strong style="color: #e2e8f0;">Outcome:</strong> 100% power availability during school hours</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Project 4: EV Charging Infrastructure -->
+        <div class="project-card animate-on-scroll">
+            <div class="icon-placeholder">
+                <i class="fas fa-car"></i>
+                <span class="kw">120 kW</span>
+                <span style="font-size: 0.7rem; color: #64748b;">Future Mobility</span>
+            </div>
+            <div>
+                <div class="meta">
+                    <span class="badge">EV Charging</span>
+                    <span class="badge">Smart Grid</span>
+                    <strong>EV Charging Infrastructure</strong>
+                    <span>Pretoria, Johannesburg</span>
+                </div>
+                <p style="color: #94a3b8; margin: 0.5rem 0;">
+                    Design and installation of solar-powered EV charging stations with smart grid integration 
+                    and load management for commercial fleets.
+                </p>
+                <ul>
+                    <li><i class="fas fa-exclamation-triangle"></i> <strong style="color: #e2e8f0;">Challenge:</strong> High demand and peak load management</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong style="color: #e2e8f0;">Solution:</strong> AI-driven load balancing with V2G readiness</li>
+                    <li><i class="fas fa-chart-line"></i> <strong style="color: #e2e8f0;">Outcome:</strong> 30% reduction in charging costs, 99% uptime</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2.5rem; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
+            <h3 style="color: #e2e8f0; font-family: 'Montserrat', sans-serif; font-size: 1.4rem;">
+                <i class="fas fa-handshake" style="color: #F97316;"></i> 
+                Ready to Build Your Project?
+            </h3>
+            <p style="color: #94a3b8; max-width: 600px; margin: 0.5rem auto;">
+                Mamoloto Technologies has delivered 1.5 MW+ of solar PV systems across South Africa. Let's discuss your next project.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                <a href="/contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Start Your Project</a>
+                <a href="/download-profile" class="btn btn-outline"><i class="fas fa-file-pdf"></i> Download Profile</a>
+            </div>
+        </div>
+
     </div>
 </section>
-
-<!-- ===== Scroll animation script ===== -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        if (elements.length === 0) return;
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -20px 0px'
-        });
-
-        elements.forEach(el => observer.observe(el));
-    });
-</script>
 {% endblock %}
